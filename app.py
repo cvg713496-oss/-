@@ -80,11 +80,11 @@ def serve_sample():
         return send_file(sample_path, mimetype="video/mp4")
     return jsonify({"error": "Sample video not found"}), 404
 
-def auto_cleanup_stale_files(min_free_gb=5.0):
+def auto_cleanup_stale_files(min_free_gb=4.0):
     """Ensure disk space is kept clean by removing old temporary files and batches."""
     try:
         import shutil, time, glob
-        total, used, free = shutil.disk_usage("uploads")
+        total, used, free = shutil.disk_usage(".")
         free_gb = free / (1024 ** 3)
         now = time.time()
         # Always remove stale batch folders older than 30 mins
@@ -95,11 +95,19 @@ def auto_cleanup_stale_files(min_free_gb=5.0):
             except Exception:
                 pass
 
-        # Clean render_temp files older than 30 mins
+        # Clean render_temp files older than 15 mins
         for rt_file in glob.glob("outputs/render_temp/*"):
             try:
-                if (now - os.path.getmtime(rt_file)) > 1800:
+                if (now - os.path.getmtime(rt_file)) > 900:
                     os.remove(rt_file)
+            except Exception:
+                pass
+
+        # Always remove incomplete/failed renders (< 1MB) older than 2 minutes
+        for fpath in glob.glob("outputs/dubbed_*.mp4"):
+            try:
+                if os.path.exists(fpath) and os.path.getsize(fpath) < 1024 * 1024 and (now - os.path.getmtime(fpath)) > 120:
+                    os.remove(fpath)
             except Exception:
                 pass
 
@@ -107,6 +115,7 @@ def auto_cleanup_stale_files(min_free_gb=5.0):
         if free_gb < min_free_gb:
             logger.info(f"Free disk space low ({free_gb:.1f} GB < {min_free_gb} GB). Running cleanup...")
             for pattern in [
+                "outputs/render_temp/*",
                 "uploads/norm_*.ts",
                 "uploads/concat_list_*.txt",
                 "uploads/concat_ts_*.txt",
@@ -123,7 +132,7 @@ def auto_cleanup_stale_files(min_free_gb=5.0):
             ]:
                 for fpath in glob.glob(pattern):
                     try:
-                        if os.path.exists(fpath) and (now - os.path.getmtime(fpath)) > 900:
+                        if os.path.exists(fpath) and (now - os.path.getmtime(fpath)) > 600:
                             os.remove(fpath)
                     except Exception:
                         pass
@@ -136,10 +145,17 @@ def auto_cleanup_stale_files(min_free_gb=5.0):
                 except Exception:
                     pass
 
-            # Protect rendered mp4 outputs: only clean up if older than 7 days (604800s)
-            for fpath in glob.glob("outputs/*.mp4"):
+            # If still low on space, clean older rendered mp4 outputs (preserve latest 3)
+            mp4_files = glob.glob("outputs/dubbed_*.mp4")
+            mp4_files.sort(key=lambda p: os.path.getmtime(p))
+            files_to_clean = mp4_files[:-3] if len(mp4_files) > 3 else []
+            for fpath in files_to_clean:
                 try:
-                    if os.path.exists(fpath) and (now - os.path.getmtime(fpath)) > 604800:
+                    _, _, cur_free = shutil.disk_usage(".")
+                    if (cur_free / (1024 ** 3)) >= min_free_gb:
+                        break
+                    if os.path.exists(fpath) and (now - os.path.getmtime(fpath)) > 1200:
+                        logger.info(f"Auto-cleaned old export to restore disk space: {fpath}")
                         os.remove(fpath)
                 except Exception:
                     pass
@@ -1292,6 +1308,9 @@ def start_export():
     if not video_path or not os.path.exists(video_path):
         return jsonify({"detail": "Video file not found"}), 404
 
+    # Ensure disk space is clean before export
+    auto_cleanup_stale_files(min_free_gb=4.0)
+
     out_id = str(uuid.uuid4())[:8]
     output_filename = f"dubbed_{resolution}_{out_id}.mp4"
     output_path = os.path.join("outputs", output_filename)
@@ -1454,6 +1473,9 @@ def export_video():
 
     if not video_path or not os.path.exists(video_path):
         return jsonify({"detail": "Video file not found"}), 404
+
+    # Ensure disk space is clean before export
+    auto_cleanup_stale_files(min_free_gb=4.0)
 
     out_id = str(uuid.uuid4())[:8]
     output_filename = f"dubbed_{resolution}_{out_id}.mp4"
