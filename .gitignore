@@ -1,0 +1,37 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+
+# Large media, temporary and user uploads
+uploads/
+outputs/
+temp/
+*.wav
+*.mp3
+*.mp4
+!sample_video.mp4
+
+# Test and scratch files
+test_*.txt
+test_*.py
+trace_raw.py
+check_a40.py
+probe_out.txt
+latest_vid.txt
+frame_*.jpg
+mom_frame_*.jpg
+temp_frame.jpg
+
+# Settings with private API keys
+settings.json
+!settings.example.json
+uploads/_settings.json
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/

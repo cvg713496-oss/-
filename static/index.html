@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocal Studio V1.0 - កម្មវិធីសម្រាយរឿង និងបញ្ចូលសម្លេង (ចិន ➔ ខ្មែរ)</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    <link rel="apple-touch-icon" href="/static/vocal_studio_icon.png">
+    <!-- Google Khmer Fonts (Moul, Kantumruy Pro, Koulen, Battambang, Dangrek, Bayon, Fasthand, Bokor, Siemreap, Noto Serif Khmer) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Bayon&family=Bokor&family=Dangrek&family=Fasthand&family=Kantumruy+Pro:wght@300;400;500;600;700&family=Koulen&family=Moul&family=Noto+Serif+Khmer:wght@600;700&family=Siemreap&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=58">
+</head>
+
+<body>
+
+    <!-- App Header -->
+    <header class="app-header">
+        <div class="brand-section">
+            <i data-lucide="clapperboard" class="icon-lg" style="color: #f59e0b;"></i>
+            <span class="brand-title">Vocal Studio</span>
+            <span class="brand-badge" id="headerBrandBadge">V1.0 - Free Edition</span>
+
+            <!-- Software Update Button (Auto-pulses when new code/version is ready) -->
+            <button class="btn-header-update" id="btnCheckUpdate" title="ពិនិត្យមើលកំណែអាប់ដេតថ្មី">
+                <span class="update-pulse-dot" id="updatePulseDot" style="display: none;"></span>
+                <i data-lucide="refresh-cw" class="icon-xs" id="updateBtnIcon"></i>
+                <span id="updateBtnLabel">Update</span>
+                <span class="update-new-badge" id="updateNewBadge" style="display: none;">NEW!</span>
+            </button>
+
+            <!-- Telegram Contact Button -->
+            <a href="https://t.me/Lanpyhe" target="_blank" rel="noopener noreferrer" class="btn-header-telegram"
+                id="btnHeaderTelegram" title="ទំនាក់ទំនងតាម Telegram: @Lanpyhe (https://t.me/Lanpyhe)">
+                <svg class="telegram-icon" viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z" />
+                </svg>
+                <span>Telegram</span>
+            </a>
+        </div>
+        <div class="header-warning">
+            <i data-lucide="shield-alert" class="icon-sm" style="color: #f59e0b;"></i>
+            <span>FREE SOFTWARE - If someone sold you this program, you've been SCAMMED!</span>
+        </div>
+        <div class="user-profile" id="btnOpenProfileModal" title="ចុចដើម្បីប្តូរឈ្មោះ និងរូបភាព Profile">
+            <div class="profile-avatar-circle" id="headerAvatarCircle">
+                <img id="headerAvatarImg" src=""
+                    style="display: none; width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                <span id="headerAvatarIcon"><i data-lucide="user" class="icon-sm"></i></span>
+            </div>
+            <span id="userName">VANNTHAN</span>
+        </div>
+    </header>
+
+    <!-- Nav Tab & Marquee Banner -->
+    <nav class="nav-bar">
+        <div class="nav-tab">
+            <i data-lucide="home" class="icon-sm" style="color: #38bdf8;"></i>
+            <span>Home</span>
+        </div>
+        <div class="marquee-wrapper">
+            <div class="marquee-content">
+                <span class="marquee-highlight-gold">✨ សូមស្វាគមន៍មកកាន់ពិភពសម្រាយរឿង ✨</span>
+                <span class="marquee-highlight-cyan">កម្មវិធីសម្រាយរឿង & បញ្ចូលសម្លេងស្វ័យប្រវត្តិកម្រិតខ្ពស់ (Vocal
+                    Studio V1.0)</span>
+                <span class="marquee-highlight-pink">🎬 សូមរីករាយជាមួយការបង្កើតវីដេអូរបស់អ្នក!</span>
+                <span class="marquee-highlight-gold">✨ សូមស្វាគមន៍មកកាន់ពិភពសម្រាយរឿង ✨</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Action Toolbar with Smooth Navigation & Scroll -->
+    <div class="toolbar-outer-wrapper">
+        <button type="button" class="toolbar-nav-arrow toolbar-arrow-left" id="btnToolbarScrollLeft"
+            title="រំកិលទៅឆ្វេង (Scroll Left)">
+            <i data-lucide="chevron-left"></i>
+        </button>
+
+        <div class="toolbar" id="mainToolbar">
+            <input type="file" id="videoFileInput" accept="video/*,.mp4,.mkv,.mov,.avi,.webm,.flv,.ts" multiple
+                style="position: absolute; left: -9999px; opacity: 0; width: 1px; height: 1px;">
+            <button type="button" class="tool-btn btn-add-video" id="btnAddVideo"
+                title="ជ្រើសរើសវីដេអូមួយ ឬច្រើន (Short Drama episodes) ដើម្បីសម្រាយរឿង">
+                <i data-lucide="folder-plus"></i>
+                <span>Add Video</span>
+            </button>
+
+            <div class="model-select-wrapper" title="ជ្រើសរើសទំហំម៉ូដែល Whisper AI">
+                <span class="icon-label"><i data-lucide="mic"></i></span>
+                <select class="model-select" id="modelSelect">
+                    <option value="medium">Whisper (Medium - ច្បាស់បំផុត ១០០%)</option>
+                    <option value="small">Whisper (Small - ច្បាស់ល្អ)</option>
+                    <option value="base" selected>Whisper (Base - លឿនមធ្យម)</option>
+                    <option value="tiny">Whisper (Tiny - លឿនរហ័ស)</option>
+                </select>
+            </div>
+
+            <div class="model-select-wrapper speed-select-wrapper" title="ល្បឿននិយាយសម្លេងខ្មែរ (សម្រាយរឿង)">
+                <span class="icon-label"><i data-lucide="gauge"></i></span>
+                <select class="model-select speed-select" id="toolbarSpeedSelect">
+                    <option value="+0%">ល្បឿន: +0% (ធម្មតា)</option>
+                    <option value="+15%">ល្បឿន: +15% (មួយៗច្បាស់)</option>
+                    <option value="+25%">ល្បឿន: +25% (ល្មមមួយៗ)</option>
+                    <option value="+35%" selected>ល្បឿន: +35% (រហ័សល្មមច្បាស់ - ណែនាំ)</option>
+                    <option value="+45%">ល្បឿន: +45% (លឿនរហ័ស)</option>
+                    <option value="+55%">ល្បឿន: +55% (លឿនខ្លាំង)</option>
+                    <option value="+75%">ល្បឿន: +75% (លឿនបំផុត)</option>
+                </select>
+            </div>
+
+            <button class="tool-btn btn-transcribe pulse-glow" id="btnAutoProcess"
+                title="ដំណើរការស្វ័យប្រវត្តិចាប់ស្គ្រីប និងបកប្រែជាភាសាខ្មែរ">
+                <span class="btn-icon"><i data-lucide="sparkles"></i></span>
+                <span>ចាប់យកស្គ្រីប & សម្រាយជាខ្មែរ</span>
+            </button>
+
+            <button class="tool-btn btn-continuous" id="btnMakeContinuous"
+                title="ភ្ជាប់ឃ្លាទាំងអស់ឱ្យបន្តជាប់គ្នារហូតដល់ចប់វីដេអូ គ្មានចន្លោះទំនេរ">
+                <i data-lucide="link"></i>
+                <span>ភ្ជាប់ឃ្លាបន្តគ្នា (គ្មានចន្លោះ)</span>
+            </button>
+
+            <button class="tool-btn btn-translate" id="btnTranslate" title="បកប្រែឡើងវិញ">
+                <i data-lucide="languages"></i>
+                <span>Translate (ខ្មែរ)</span>
+            </button>
+
+            <button class="tool-btn btn-assign-voice" id="btnAssignVoiceModal"
+                title="ជ្រើសរើសសម្លេងអ្នកនិយាយ (Voice/TTS)">
+                <i data-lucide="users"></i>
+                <span>Assign Voice</span>
+            </button>
+
+            <button class="tool-btn btn-voice-tuner" id="btnVoiceTunerModal"
+                style="background: linear-gradient(135deg, #0284c7, #4f46e5); color: #fff; border: 1px solid rgba(56, 189, 248, 0.45); box-shadow: 0 2px 10px rgba(14, 165, 233, 0.25);"
+                title="កែសម្រួលបំពង់សំឡេង (ធ្ងន់/ស្រាល/គ្រលរ/ស្រទន់) និងល្បឿនរបស់ ពិសិដ្ឋ និង ស្រីមុំ">
+                <i data-lucide="sliders"></i>
+                <span>បំពង់សំឡេង (ពិសិដ្ឋ & ស្រីមុំ)</span>
+            </button>
+
+            <button class="tool-btn btn-auto-gender" id="btnAutoDetectGenders"
+                title="វិភាគសំឡេងដើម្បីបែងចែកតួអង្គប្រុស ឬស្រីដោយស្វ័យប្រវត្តតាមតួអង្គក្នុងវីដេអូ">
+                <i data-lucide="bot"></i>
+                <span>បែងចែកប្រុស/ស្រី (AI)</span>
+            </button>
+
+            <button class="tool-btn btn-bgm" id="btnBgmModal" title="បន្ថែមភ្លេងផ្ទៃខាងក្រោយ">
+                <i data-lucide="music-2"></i>
+                <span>Audio BG</span>
+            </button>
+
+            <button class="tool-btn btn-watermark" id="btnWatermarkModal" title="ដាក់ Logo / Watermark រក្សាកម្មសិទ្ធិ">
+                <i data-lucide="shield-check"></i>
+                <span>Logo & Watermark</span>
+            </button>
+
+            <button class="tool-btn btn-thumbnail" id="btnThumbnailModal"
+                title="បង្កើត Thumbnail និងដាក់ចំណងជើងរឿងខាងមុខវីដេអូ">
+                <i data-lucide="image"></i>
+                <span>Thumbnail & ចំណងជើង</span>
+            </button>
+
+            <!-- Toggle Button for Original Video Audio -->
+            <button class="tool-btn btn-toggle-orig-audio" id="btnToolbarToggleOrigAudio"
+                title="ចុចដើម្បីបិទ ឬបើកសម្លេងដើមនៃវីដេអូ">
+                <span id="tbMuteIcon"><i data-lucide="volume-x"></i></span>
+                <span id="tbMuteLabel">សម្លេងដើម: បិទ</span>
+            </button>
+
+            <!-- Right Side: Settings -->
+            <div class="toolbar-group-right"
+                style="display: inline-flex; align-items: center; gap: 6px; margin-left: auto;">
+                <button class="tool-btn btn-settings" id="btnSettingsModal" title="ការកំណត់ប្រព័ន្ធ (Settings)">
+                    <i data-lucide="settings"></i>
+                    <span>Settings</span>
+                </button>
+            </div>
+        </div>
+
+        <button type="button" class="toolbar-nav-arrow toolbar-arrow-right" id="btnToolbarScrollRight"
+            title="រំកិលទៅស្តាំ (Scroll Right)">
+            <i data-lucide="chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Subtitle & Dubbing Script Grid -->
+        <section class="table-container">
+            <div class="table-header-bar">
+                <div class="table-stats">
+                    <span id="segmentCount">0</span> ជួរអត្ថបទ | វីដេអូ៖ <span id="videoStatus">មិនទាន់ជ្រើស</span>
+                </div>
+                <div class="table-actions">
+                    <button class="btn-mini" id="btnCopyTable"
+                        title="ចម្លងទិន្នន័យតារាងទាំងអស់ (Start, End, Original, Khmer)"><i data-lucide="copy"></i>
+                        Copy</button>
+                    <button class="btn-mini" id="btnPasteTable" title="បញ្ចូលទិន្នន័យតារាងដែលបាន Copy (Paste)"><i
+                            data-lucide="clipboard-paste"></i> Paste</button>
+                    <button class="btn-mini" id="btnAddRow"><i data-lucide="plus"></i> បន្ថែមជួរ</button>
+                    <button class="btn-mini" id="btnCleanDuplicates" title="សម្អាតពាក្យជាន់គ្នាដដែលៗចេញ"><i
+                            data-lucide="sparkles"></i> លុបពាក្យជាន់គ្នា</button>
+                    <button class="btn-mini" id="btnSaveProject"><i data-lucide="save"></i> រក្សាទុក Project</button>
+                    <button class="btn-mini" id="btnExportSrt"><i data-lucide="file-text"></i> ទាញយក SRT</button>
+                </div>
+            </div>
+
+            <div class="grid-wrapper">
+                <table class="dub-table">
+                    <thead>
+                        <tr>
+                            <th class="col-idx">#</th>
+                            <th class="col-time">Start</th>
+                            <th class="col-time">End</th>
+                            <th class="col-orig">Original (ភាសាចិន)</th>
+                            <th class="col-trans">Translated (សម្រាយជាភាសាខ្មែរ)</th>
+                            <th class="col-voice">Voice</th>
+                            <th class="col-action">Play</th>
+                            <th class="col-action">Del</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Draggable Panel Resizer -->
+        <div class="panel-resizer" id="panelResizer" title="ចុចអូសឆ្វេង/ស្តាំ ដើម្បីពង្រីក/បង្រួមផ្ទាំងវីដេអូ">
+            <div class="resizer-handle"></div>
+        </div>
+
+        <!-- Video Preview -->
+        <section class="video-container" id="videoContainer">
+            <!-- Episode Playlist Bar (Multi-Video Continuous Play) -->
+            <div class="playlist-container" id="playlistContainer"
+                style="display: none; width: 100%; background: #0b1120; border: 1px solid #1e293b; border-radius: 8px; padding: 6px 10px; margin-bottom: 6px; box-sizing: border-box;">
+                <div
+                    style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; font-size: 11.5px;">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <span style="font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 4px;">
+                            <i data-lucide="film" class="icon-sm"></i> បញ្ជីភាគ (<span
+                                id="playlistCurrentNum">1</span>/<span id="playlistTotalNum">0</span>)
+                        </span>
+                        <span id="playlistCurrentTitle"
+                            style="color: #94a3b8; font-size: 11px; max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <button type="button" class="btn-mini" id="btnToggleAutoPlayNext"
+                            style="background: #064e3b; border: 1px solid #10b981; color: #6ee7b7; font-size: 10.5px; padding: 2px 7px; border-radius: 4px; cursor: pointer;"
+                            title="បើក/បិទ ការចាក់ភាគបន្ទាប់ដោយស្វ័យប្រវត្តិ">
+                            <i data-lucide="repeat" class="icon-xs"></i> បន្ទាប់: បើក
+                        </button>
+                    </div>
+                </div>
+                <div class="playlist-items-scroll" id="playlistItems"
+                    style="display: flex; gap: 5px; overflow-x: auto; padding-bottom: 3px; scrollbar-width: thin;">
+                    <!-- Dynamically rendered episode badges -->
+                </div>
+            </div>
+
+            <!-- Video Viewport: Auto-centered, never clips or cuts off -->
+            <div class="video-viewport" id="videoViewport">
+                <div class="video-frame" id="videoFrame">
+                    <video id="videoPlayer" preload="auto">
+                        <p>Browser does not support video tag.</p>
+                    </video>
+                    <div id="logosContainer"></div>
+                    <!-- ★ Subtitle Mask (Blur / Cover original Chinese subtitles) -->
+                    <div class="subtitle-mask" id="subtitleMask">
+                        <span class="subtitle-mask-handle">↕️ អូសឡើងលើ/ចុះក្រោម ដើម្បីតម្រង់ចំអក្សរចិន</span>
+                    </div>
+                    <div class="subtitle-overlay" id="subtitlePreview"></div>
+                </div>
+            </div>
+
+            <!-- Video Controls: Slim 2-row layout leaving maximum height for video -->
+            <div class="video-controls" id="videoControls">
+                <!-- Row 1: Primary Media Transport, Audio Toggles & Timecode -->
+                <div class="video-ctrl-row video-ctrl-row-main">
+                    <div class="transport-left">
+                        <button class="btn-ctrl btn-ctrl-play" id="btnPlayPause" title="ចាក់ / ផ្អាក (Space)">
+                            <span id="playIconSpan"><i data-lucide="play"></i></span> <span
+                                id="playLabelSpan">Play</span>
+                        </button>
+                        <button class="btn-ctrl btn-ctrl-step" id="btnRewind" title="ថយក្រោយ 3 វិនាទី (←)">
+                            <i data-lucide="rotate-ccw"></i> <span>-3s</span>
+                        </button>
+                        <button class="btn-ctrl btn-ctrl-step" id="btnForward" title="ទៅមុខ 3 វិនាទី (→)">
+                            <i data-lucide="rotate-cw"></i> <span>+3s</span>
+                        </button>
+                    </div>
+
+                    <!-- Audio Tracks Switcher (Dub / Original / BGM) -->
+                    <div class="audio-ctrl-pills">
+                        <button class="btn-ctrl btn-audio-pill" id="btnLiveDubToggle"
+                            title="បើក/បិទការនិយាយសម្លេងខ្មែរតាមវីដេអូ"
+                            style="background: linear-gradient(135deg, #312e81, #4338ca); border-color: #6366f1; color: #e0e7ff; font-weight: 600;">
+                            <span id="liveDubIcon"><i data-lucide="mic"></i></span>
+                            <span id="liveDubLabel">Dub: បើក</span>
+                        </button>
+                        <button class="btn-ctrl btn-audio-pill" id="btnToggleOrigAudio"
+                            title="ចុចដើម្បីបិទ ឬបើកសម្លេងដើមក្នុងវីដេអូ"
+                            style="background: rgba(30, 41, 59, 0.7); border-color: rgba(239, 68, 68, 0.4); color: #fca5a5; font-weight: 600;">
+                            <span id="muteIcon"><i data-lucide="volume-x"></i></span>
+                            <span id="muteLabel">ដើម: បិទ</span>
+                        </button>
+                        <button class="btn-ctrl btn-audio-pill" id="btnToggleBgm"
+                            title="ចុចដើម្បីបិទ ឬបើកភ្លេងផ្ទៃខាងក្រោយ"
+                            style="background: rgba(30, 41, 59, 0.7); border-color: rgba(255, 255, 255, 0.1); color: #94a3b8; font-weight: 600;">
+                            <span id="bgmToggleIcon"><i data-lucide="volume-x"></i></span>
+                            <span id="bgmToggleLabel">BGM: បិទ</span>
+                        </button>
+                    </div>
+
+                    <div class="video-time-box" title="ពេលវេលាវីដេអូបច្ចុប្បន្ន / រយៈពេលសរុប">
+                        <span id="currentTimeDisplay">00:00.00</span> / <span id="durationDisplay">00:00.00</span>
+                    </div>
+                </div>
+
+                <!-- Row 2: Subtitles, Video Tools & Theater Mode -->
+                <div class="video-ctrl-row video-ctrl-row-tools">
+                    <!-- Subtitle Quick Bar -->
+                    <div class="sub-docked-controls" id="subControls">
+                        <button class="sub-ctrl-btn" id="btnSubDecrease"
+                            title="បង្រួមទំហំអក្សរ Subtitle (A-)">A-</button>
+                        <span class="sub-size-badge" id="subSizeBadge">18px</span>
+                        <button class="sub-ctrl-btn" id="btnSubIncrease"
+                            title="ពង្រីកទំហំអក្សរ Subtitle (A+)">A+</button>
+                        <button class="sub-ctrl-btn sub-toggle-btn" id="btnSubToggleVisible"
+                            title="បង្ហាញ ឬលាក់ Subtitle លើវីដេអូ">
+                            <span id="subVisibleIcon"><i data-lucide="eye"></i></span>
+                            <span id="subVisibleText">Sub</span>
+                        </button>
+                    </div>
+
+                    <!-- Video Tools: Blur, Crop, Proxy, Theater Mode -->
+                    <div class="tools-pills">
+                        <!-- Chinese Subtitle Blur/Mask Button with Quick Height Adjust -->
+                        <div class="mask-ctrl-wrapper" style="display: inline-flex; align-items: center;">
+                            <button class="btn-ctrl btn-tool-pill" id="btnToggleMask"
+                                title="ចុចដើម្បីប្តូរ៖ បិទ ➔ Blur ➔ Cover"
+                                style="background: rgba(30, 41, 59, 0.7); border-color: rgba(255, 255, 255, 0.1); color: #94a3b8; font-weight: 600;">
+                                <span id="maskIcon"><i data-lucide="scan-line"></i></span>
+                                <span id="maskLabel">Blur: បិទ</span>
+                            </button>
+                            <div id="maskAdjustGroup"
+                                style="display: none; align-items: center; background: #0f172a; border: 1px solid #3b82f6; border-radius: 6px; margin-left: 3px; padding: 1px 3px; gap: 2px;">
+                                <button type="button" class="sub-ctrl-btn" id="btnMaskDown"
+                                    title="រំកិលប្រអប់ Blur ចុះក្រោម (Move Down)"
+                                    style="padding: 2px 6px; font-size: 10px; cursor: pointer;">▼</button>
+                                <span class="sub-size-badge" id="maskPosBadge" title="កម្ពស់ប្រអប់ Blur ពីបាតក្រោម"
+                                    style="font-size: 11px; padding: 1px 5px; min-width: 32px; text-align: center; color: #38bdf8; font-weight: 700;">19%</span>
+                                <button type="button" class="sub-ctrl-btn" id="btnMaskUp"
+                                    title="រំកិលប្រអប់ Blur ឡើងលើ (Move Up)"
+                                    style="padding: 2px 6px; font-size: 10px; cursor: pointer;">▲</button>
+                            </div>
+                        </div>
+
+                        <!-- Smart Crop Button -->
+                        <button class="btn-ctrl btn-tool-pill" id="btnSmartCrop"
+                            title="កាត់ផ្នែកក្រោមចោលបន្តិចដើម្បីលុបអក្សរចិនចេញស្អាត ១០០%"
+                            style="background: rgba(30, 41, 59, 0.7); border-color: rgba(255, 255, 255, 0.1); color: #94a3b8; font-weight: 600;">
+                            <span id="smartCropIcon"><i data-lucide="scissors"></i></span>
+                            <span id="smartCropLabel">Crop: បិទ</span>
+                        </button>
+
+                        <!-- Proxy Preview Button -->
+                        <button class="btn-ctrl btn-tool-pill" id="btnToggleProxy"
+                            title="ចុចដើម្បីប្តូររវាង Proxy (480p លឿនរលូន) និង Original (ច្បាស់ដើម)"
+                            style="background: rgba(30, 41, 59, 0.7); border-color: rgba(255, 255, 255, 0.1); color: #94a3b8; font-weight: 600;">
+                            <span id="proxyIcon"><i data-lucide="zap"></i></span>
+                            <span id="proxyLabel">Proxy: បិទ</span>
+                        </button>
+
+                        <!-- Theater Mode (Enlarge Video) -->
+                        <button class="btn-ctrl btn-tool-pill btn-theater-pill" id="btnTheaterMode"
+                            title="ពង្រីកផ្ទាំងវីដេអូអោយធំច្បាស់ (Theater Mode)">
+                            <i data-lucide="maximize-2"></i>
+                            <span>ពង្រីកធំ</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Timeline & Export -->
+    <footer class="bottom-section">
+        <!-- Timeline Control Bar: Track Legends & Zoom Controls -->
+        <div class="timeline-header-bar"
+            style="display: flex; justify-content: space-between; align-items: center; padding: 2px 4px 6px; user-select: none;">
+            <div style="display: flex; align-items: center; gap: 14px; font-size: 11.5px; color: #94a3b8;">
+                <span style="display: flex; align-items: center; gap: 6px;">
+                    <i data-lucide="user" class="icon-sm" style="color: #4ade80;"></i>
+                    <strong style="color: #4ade80;">Track 1:</strong> <span>តួប្រុស (Actor 1)</span>
+                </span>
+                <span style="display: flex; align-items: center; gap: 6px;">
+                    <i data-lucide="user-check" class="icon-sm" style="color: #c084fc;"></i>
+                    <strong style="color: #c084fc;">Track 2:</strong> <span>តួស្រី (Actor 2)</span>
+                </span>
+                <span id="timelineSegCountBadge"
+                    style="background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); padding: 1px 7px; border-radius: 4px; font-weight: 700; font-size: 11px;">0
+                    ប្រយោគ</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+                <span style="font-size: 11px; color: #94a3b8; font-weight: 600;"><i data-lucide="search"
+                        class="icon-xs"></i> ពង្រីក Timeline:</span>
+                <button type="button" id="btnZoomOut" class="btn-mini" title="បង្រួម Timeline"
+                    style="padding: 3px 9px; font-size: 11px; background: #1e293b; border: 1px solid #334155; border-radius: 4px; cursor: pointer;"><i
+                        data-lucide="minus" class="icon-xs"></i></button>
+                <span id="zoomLevelLabel"
+                    style="font-size: 11px; font-family: monospace; font-weight: 700; color: #38bdf8; min-width: 48px; text-align: center; cursor: pointer;"
+                    title="ចុចដើម្បីប្តូរកម្រិតពង្រីករហ័ស (100% ➔ 200% ➔ 500% ➔ 1000% ➔ 10000%)">100%</span>
+                <button type="button" id="btnZoomIn" class="btn-mini" title="ពង្រីក Timeline (មើលអត្ថបទច្បាស់ទូលាយ)"
+                    style="padding: 3px 9px; font-size: 11px; background: #1e293b; border: 1px solid #334155; border-radius: 4px; cursor: pointer;"><i
+                        data-lucide="plus" class="icon-xs"></i></button>
+                <button type="button" id="btnZoomFit" class="btn-mini"
+                    title="ចុចទីនេះដើម្បីបង្ហាញគ្រប់ប្រយោគទាំងអស់លើអេក្រង់ (Fit to Screen)"
+                    style="padding: 3px 12px; font-size: 11px; background: #2563eb; border: 1px solid #3b82f6; border-radius: 4px; color: #ffffff; cursor: pointer; font-weight: 700; box-shadow: 0 1px 4px rgba(37,99,235,0.35);"><i
+                        data-lucide="maximize-2" class="icon-xs"></i> Fit (បង្ហាញទាំងអស់)</button>
+            </div>
+        </div>
+
+        <div class="timeline-wrapper" id="timelineContainer">
+            <div class="timeline-ruler" id="timelineRuler"></div>
+            <div class="timeline-tracks" id="timelineTracks">
+                <div class="timeline-cursor" id="timelineCursor" style="left: 0px;"></div>
+                <div class="timeline-track" id="track1" data-track="1"></div>
+                <div class="timeline-track" id="track2" data-track="2"></div>
+            </div>
+        </div>
+
+        <div class="export-row">
+            <button class="btn-export" id="btnExport">
+                <i data-lucide="download"></i>
+                <span>Export Video</span>
+            </button>
+            <button type="button" class="btn-ctrl" id="btnBottomThumbnail"
+                title="បង្កើត Thumbnail & សរសេរចំណងជើងរឿងខាងមុខវីដេអូ"
+                style="background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #ffffff; border: 1px solid #818cf8; padding: 7px 14px; font-weight: 700; font-size: 12px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 10px rgba(99, 102, 241, 0.35);">
+                <i data-lucide="image" class="icon-sm"></i>
+                <span>Thumbnail & ចំណងជើង</span>
+            </button>
+            <label
+                style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #a7f3d0; cursor: pointer; background: #064e3b; padding: 6px 12px; border-radius: 6px; border: 1px solid #10b981; user-select: none;"
+                title="រក្សាទុកសម្លេង Background របស់វីដេអូដើម">
+                <input type="checkbox" id="chkMuteOrigExport"
+                    style="cursor: pointer; width: 15px; height: 15px; accent-color: #10b981;">
+                <span id="chkMuteOrigText"><i data-lucide="volume-2" class="icon-sm"></i> ទុកសម្លេង Background
+                    វីដេអូដើម</span>
+            </label>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+                <div class="progress-text" id="progressText">100% Ready</div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <span id="statusMessage">កម្មវិធីបានត្រៀមរួចរាល់។ សូមជ្រើសរើសវីដេអូដើម្បីចាប់ផ្ដើម។</span>
+            <span id="dubStatus">TTS: Edge Neural Khmer (Piseth & Sreymom)</span>
+        </div>
+    </footer>
+
+    <!-- Hidden Audio element for previews and BGM -->
+    <audio id="previewAudio" style="display: none;"></audio>
+    <audio id="bgmAudioPlayer" style="display: none;"></audio>
+
+    <!-- Modal: Assign Voice -->
+    <div class="modal-overlay" id="assignVoiceModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title"><i data-lucide="users"></i> <span>បែងចែកសម្លេងតួអង្គ (Assign Voice)</span>
+                </div>
+                <button class="modal-close" data-close="assignVoiceModal"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>សម្លេងតួទី 1 (Actor 1 / ប្រុស):</label>
+                    <select id="modalVoiceActor1">
+                        <option value="km-KH-PisethNeural" selected>km-KH-PisethNeural (ប្រុស)</option>
+                        <option value="km-KH-SreymomNeural">km-KH-SreymomNeural (ស្រី)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>សម្លេងតួទី 2 (Actor 2 / ស្រី):</label>
+                    <select id="modalVoiceActor2">
+                        <option value="km-KH-SreymomNeural" selected>km-KH-SreymomNeural (ស្រី)</option>
+                        <option value="km-KH-PisethNeural">km-KH-PisethNeural (ប្រុស)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ល្បឿននិយាយ (Speech Rate):</label>
+                    <select id="modalSpeechRate">
+                        <option value="+0%">ធម្មតា (Normal)</option>
+                        <option value="+15%">មួយៗច្បាស់ (+15%)</option>
+                        <option value="+25%">ល្បឿន: +25% (ល្មមមួយៗ)</option>
+                        <option value="+35%" selected>ល្បឿន: +35% (រហ័សល្មមច្បាស់ - ណែនាំ)</option>
+                        <option value="+45%">លឿនរហ័ស (+45%)</option>
+                        <option value="+55%">លឿនខ្លាំង (+55%)</option>
+                        <option value="+75%">លឿនបំផុត (+75%)</option>
+                    </select>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+                    <button type="button" class="btn-mini" id="btnSetAllMale"
+                        style="background: #15803d; color: #fff; padding: 8px; border: 1px solid #22c55e; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; font-weight: 600;"
+                        title="កំណត់គ្រប់ជួរទាំងអស់ជាសំឡេងតួប្រុស (Piseth)">
+                        <i data-lucide="user"></i> <span>ដាក់ប្រុសទាំងអស់</span>
+                    </button>
+                    <button type="button" class="btn-mini" id="btnSetAllFemale"
+                        style="background: #7e22ce; color: #fff; padding: 8px; border: 1px solid #a855f7; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; font-weight: 600;"
+                        title="កំណត់គ្រប់ជួរទាំងអស់ជាសំឡេងតួស្រី (Sreymom)">
+                        <i data-lucide="user-check"></i> <span>ដាក់ស្រីទាំងអស់</span>
+                    </button>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <button type="button" class="btn-mini" id="btnOpenVoiceTunerFromAssign"
+                        style="width: 100%; background: linear-gradient(135deg, #0284c7, #4f46e5); color: #fff; padding: 9px 12px; border: 1px solid #38bdf8; border-radius: 7px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px; font-weight: 700;">
+                        <i data-lucide="sliders"></i> <span>🎛️ កែសម្រួលបំពង់សំឡេង ពិសិដ្ឋ & ស្រីមុំ (ធ្ងន់ / ស្រាល /
+                            ល្បឿន)</span>
+                    </button>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-mini" data-close="assignVoiceModal">បោះបង់</button>
+                    <button class="btn-mini" id="btnApplyVoiceAssignment" style="background: #4f46e5; color: #fff;"><i
+                            data-lucide="check"></i> អនុវត្តតាមការកំណត់</button>
+                </div>
+                <div class="form-group"
+                    style="margin-top: 15px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <!-- Web Audio API Button (Client-Side Instant Pitch Detection) -->
+                    <button class="btn-mini" id="btnModalWebAudioDetect"
+                        style="width: 100%; padding: 11px; background: linear-gradient(135deg, #059669, #10b981); color: #fff; font-weight: bold; border-radius: 8px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35); margin-bottom: 5px;">
+                        <i data-lucide="zap"></i>
+                        <span>🌐 វិភាគតាម Web Audio API (លើ Browser ផ្ទាល់ - ០.២ វិនាទី)</span>
+                    </button>
+                    <small
+                        style="color: #6ee7b7; font-size: 11px; display: block; margin-bottom: 12px; text-align: center;">
+                        វាស់កម្រិតរលកសំឡេង (F0 Pitch) ក្នុង Browser ភ្លាមៗ មិនបាច់ប្រើ Internet មិនអស់ Token
+                    </small>
+
+                    <!-- Gemini Multimodal AI Button -->
+                    <button class="btn-mini" id="btnModalDetectGemini"
+                        style="width: 100%; padding: 9px; background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #fff; font-weight: bold; border-radius: 8px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35); margin-bottom: 5px;">
+                        <i data-lucide="sparkles"></i>
+                        <span>✨ វិភាគតាម Google Gemini AI (ស្ដាប់សំឡេង + យល់សាច់រឿង)</span>
+                    </button>
+                    <small
+                        style="color: #a5b4fc; font-size: 10.5px; display: block; margin-bottom: 12px; text-align: center;">
+                        Gemini ស្ដាប់សំឡេងផ្ទាល់ និងយល់បរិបទតួអង្គច្បាស់ ១០០% តាម AI
+                    </small>
+
+                    <!-- Local Acoustic Pitch Button -->
+                    <button class="btn-mini" id="btnModalAutoDetectGender"
+                        style="width: 100%; padding: 8px; background: rgba(30, 41, 59, 0.7); border: 1px solid #10b981; color: #34d399; font-weight: 600; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                        <i data-lucide="activity"></i>
+                        <span>⚡ វិភាគតាមរលកសំឡេង Server (Acoustic Pitch - Local)</span>
+                    </button>
+                    <small
+                        style="color: #94a3b8; font-size: 10.5px; display: block; margin-top: 4px; text-align: center;">
+                        វិភាគរលកសំឡេង (F0 Pitch) លើម៉ាស៊ីន Server មិនអស់ Token
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Voice Timbre & Pitch Studio (Piseth & Sreymom) -->
+    <div class="modal-overlay" id="voiceTunerModal">
+        <div class="modal-card" style="max-width: 720px; width: 95%;">
+            <div class="modal-header"
+                style="background: linear-gradient(135deg, rgba(2, 132, 199, 0.2), rgba(79, 70, 229, 0.2)); border-bottom: 1px solid rgba(56, 189, 248, 0.25);">
+                <div class="modal-title" style="color: #38bdf8; font-weight: 700;">
+                    <i data-lucide="sliders"></i>
+                    <span>🎛️ កែសម្រួលបំពង់សំឡេងរបស់ ពិសិដ្ឋ (ប្រុស) និង ស្រីមុំ (ស្រី)</span>
+                </div>
+                <button class="modal-close" data-close="voiceTunerModal"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 16px; max-height: 80vh; overflow-y: auto;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px;">
+                    <!-- Piseth Card -->
+                    <div
+                        style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(34, 197, 94, 0.35); border-radius: 10px; padding: 14px;">
+                        <div
+                            style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.08);">
+                            <div
+                                style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: #4ade80; font-size: 14px;">
+                                <i data-lucide="user"></i>
+                                <span>👨 បំពង់សំឡេង ពិសិដ្ឋ (តួប្រុស)</span>
+                            </div>
+                            <span id="pisethSummaryBadge"
+                                style="font-size: 11px; background: rgba(34, 197, 94, 0.15); color: #86efac; padding: 3px 8px; border-radius: 999px; border: 1px solid rgba(34, 197, 94, 0.3);">+0Hz
+                                | +35%</span>
+                        </div>
+
+                        <!-- Quick Presets for Piseth -->
+                        <div style="margin-bottom: 12px;">
+                            <label style="font-size: 11.5px; color: #94a3b8; display: block; margin-bottom: 6px;">⚡
+                                ជ្រើសរើសស្ទីលបំពង់សំឡេងរហ័ស (Presets)៖</label>
+                            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                                <button type="button" class="btn-mini piseth-preset-btn" data-pitch="0" data-rate="35"
+                                    style="font-size: 11px; padding: 5px 9px; background: #1e293b; border: 1px solid #334155; color: #e2e8f0; border-radius: 6px; cursor: pointer;">
+                                    ✨ ធម្មជាតិច្បាស់ (ដើម)
+                                </button>
+                                <button type="button" class="btn-mini piseth-preset-btn" data-pitch="-6" data-rate="30"
+                                    style="font-size: 11px; padding: 5px 9px; background: #1e293b; border: 1px solid #334155; color: #e2e8f0; border-radius: 6px; cursor: pointer;">
+                                    👑 ធ្ងន់មាំ (តួឯក/អំណាច)
+                                </button>
+                                <button type="button" class="btn-mini piseth-preset-btn" data-pitch="-12" data-rate="25"
+                                    style="font-size: 11px; padding: 5px 9px; background: #1e293b; border: 1px solid #334155; color: #e2e8f0; border-radius: 6px; cursor: pointer;">
+                                    🦁 គ្រលរធ្ងន់ (ចាស់ទុំ/ស្ដេច)
+                                </button>
+                                <button type="button" class="btn-mini piseth-preset-btn" data-pitch="3" data-rate="40"
+                                    style="font-size: 11px; padding: 5px 9px; background: #1e293b; border: 1px solid #334155; color: #e2e8f0; border-radius: 6px; cursor: pointer;">
+                                    ⚡ កំលោះរហ័ស (សម្រាយរឿង)
+                                </button>
+                                <button type="button" class="btn-mini piseth-preset-btn" data-pitch="8" data-rate="35"
+                                    style="font-size: 11px; padding: 5px 9px; background: #1e293b; border: 1px solid #334155; color: #e2e8f0; border-radius: 6px; cursor: pointer;">
+                                    👦 ស្រាល (ក្មេងប្រុស)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Piseth Pitch Slider -->
+                        <div style="margin-bottom: 12px;">
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                                <span style="color: #cbd5e1;">🎚️ កម្រិតបំពង់សំឡេង (Pitch ធ្ងន់ ↔ ស្រាល):</span>
+                                <strong id="pisethPitchLabel" style="color: #4ade80;">+0Hz (ធម្មតា)</strong>
+                            </div>
+                            <input type="range" id="pisethPitchSlider" min="-20" max="20" step="1" value="0"
+                                style="width: 100%; accent-color: #22c55e; cursor: pointer;">
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 10px; color: #64748b;">
+                                <span>-20Hz (គ្រលរធ្ងន់ខ្លាំង)</span>
+                                <span>0Hz (ដើម)</span>
+                                <span>+20Hz (ស្រួច/ខ្ពស់)</span>
+                            </div>
+                        </div>
+
+                        <!-- Piseth Speed Slider -->
+                        <div style="margin-bottom: 12px;">
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                                <span style="color: #cbd5e1;">⏩ ល្បឿននិយាយ (Speed):</span>
+                                <strong id="pisethRateLabel" style="color: #38bdf8;">+35%</strong>
+                            </div>
+                            <input type="range" id="pisethRateSlider" min="-10" max="75" step="5" value="35"
+                                style="width: 100%; accent-color: #0ea5e9; cursor: pointer;">
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 10px; color: #64748b;">
+                                <span>-10% (យឺត)</span>
+                                <span>+35% (ណែនាំ)</span>
+                                <span>+75% (លឿនបំផុត)</span>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn-mini" id="btnPreviewPisethVoice"
+                            style="width: 100%; padding: 9px; background: linear-gradient(135deg, #15803d, #16a34a); color: #fff; font-weight: 700; border: 1px solid #4ade80; border-radius: 7px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px;">
+                            <i data-lucide="volume-2"></i>
+                            <span>🔊 សាកល្បងស្ដាប់សំឡេង ពិសិដ្ឋ</span>
+                        </button>
+                    </div>
+
+                    <!-- Sreymom Card -->
+                    <div
+                        style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(168, 85, 247, 0.35); border-radius: 10px; padding: 14px;">
+                        <div
+                            style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.08);">
+                            <div
+                                style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: #c084fc; font-size: 14px;">
+                                <i data-lucide="user-check"></i>
+                                <span>👩 បំពង់សំឡេង ស្រីមុំ (តួស្រី)</span>
+                            </div>
+                            <span id="sreymomSummaryBadge"
+                                style="font-size: 11px; background: rgba(168, 85, 247, 0.15); color: #d8b4fe; padding: 3px 8px; border-radius: 999px; border: 1px solid rgba(168, 85, 247, 0.3);">+0Hz
+                                | +35%</span>
+                        </div>
+
+                        <!-- Quick Presets for Sreymom -->
+                        <div style="margin-bottom: 12px;">
+                            <label style="font-size: 11.5px; color: #94a3b8; display: block; margin-bottom: 6px;">⚡
+                                ជ្រើសរើសស្ទីលបំពង់សំឡេងរហ័ស (Presets)៖</label>
+                            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                                <button type="button" class="btn-mini sreymom-preset-btn" data-pitch="0" data-rate="35"
+                                    style="font-size: 11px; padding: 5px 9px; background: #1e293b; border: 1px solid #334155; color: #e2e8f0; border-radius: 6px; cursor: pointer;">
+                                    ✨ ធម្មជាតិច្បាស់ (ដើម)
+                                </button>
+                                <button type="button" class="btn-mini sreymom-preset-btn" data-pitch="4" data-rate="32"
+                                    style="font-size: 11px; padding: 5px 9px; background: #1e293b; border: 1px solid #334155; color: #e2e8f0; border-radius: 6px; cursor: pointer;">
+                                    🌸 ស្រទន់ផ្អែម (តួឯកស្រី)
+                                </button>
+                                <button type="button" class="btn-mini sreymom-preset-btn" data-pitch="10" data-rate="38"
+                                    style="font-size: 11px; padding: 5px 9px; background: #1e293b; border: 1px solid #334155; color: #e2e8f0; border-radius: 6px; cursor: pointer;">
+                                    🎀 ស្រួយតូច (កូនស្រី/យុវតី)
+                                </button>
+                                <button type="button" class="btn-mini sreymom-preset-btn" data-pitch="-5" data-rate="28"
+                                    style="font-size: 11px; padding: 5px 9px; background: #1e293b; border: 1px solid #334155; color: #e2e8f0; border-radius: 6px; cursor: pointer;">
+                                    👑 មាំថ្លៃថ្នូរ (ម្ចាស់ក្សត្រី)
+                                </button>
+                                <button type="button" class="btn-mini sreymom-preset-btn" data-pitch="-10"
+                                    data-rate="25"
+                                    style="font-size: 11px; padding: 5px 9px; background: #1e293b; border: 1px solid #334155; color: #e2e8f0; border-radius: 6px; cursor: pointer;">
+                                    👵 ចាស់ទុំ (ម៉ែក្មេក/លោកយាយ)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Sreymom Pitch Slider -->
+                        <div style="margin-bottom: 12px;">
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                                <span style="color: #cbd5e1;">🎚️ កម្រិតបំពង់សំឡេង (Pitch ធ្ងន់ ↔ ស្រួយ):</span>
+                                <strong id="sreymomPitchLabel" style="color: #c084fc;">+0Hz (ធម្មតា)</strong>
+                            </div>
+                            <input type="range" id="sreymomPitchSlider" min="-20" max="20" step="1" value="0"
+                                style="width: 100%; accent-color: #a855f7; cursor: pointer;">
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 10px; color: #64748b;">
+                                <span>-20Hz (ធ្ងន់/ចាស់ទុំ)</span>
+                                <span>0Hz (ដើម)</span>
+                                <span>+20Hz (ស្រួយ/តូច)</span>
+                            </div>
+                        </div>
+
+                        <!-- Sreymom Speed Slider -->
+                        <div style="margin-bottom: 12px;">
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                                <span style="color: #cbd5e1;">⏩ ល្បឿននិយាយ (Speed):</span>
+                                <strong id="sreymomRateLabel" style="color: #38bdf8;">+35%</strong>
+                            </div>
+                            <input type="range" id="sreymomRateSlider" min="-10" max="75" step="5" value="35"
+                                style="width: 100%; accent-color: #0ea5e9; cursor: pointer;">
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 10px; color: #64748b;">
+                                <span>-10% (យឺត)</span>
+                                <span>+35% (ណែនាំ)</span>
+                                <span>+75% (លឿនបំផុត)</span>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn-mini" id="btnPreviewSreymomVoice"
+                            style="width: 100%; padding: 9px; background: linear-gradient(135deg, #7e22ce, #9333ea); color: #fff; font-weight: 700; border: 1px solid #c084fc; border-radius: 7px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px;">
+                            <i data-lucide="volume-2"></i>
+                            <span>🔊 សាកល្បងស្ដាប់សំឡេង ស្រីមុំ</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sample Preview Text Input -->
+                <div
+                    style="margin-top: 14px; background: rgba(15, 23, 42, 0.65); border: 1px solid #1e293b; border-radius: 8px; padding: 10px 12px;">
+                    <label style="font-size: 11.5px; color: #94a3b8; display: block; margin-bottom: 5px;">💬
+                        ប្រយោគសម្រាប់សាកល្បងស្ដាប់សំឡេង (អាចកែប្រែបាន)៖</label>
+                    <input type="text" id="voiceTunerSampleText"
+                        value="ចាប់ពីថ្ងៃនេះទៅ ខ្ញុំនឹងការពារនាងឱ្យអស់ពីជីវិត មិនឱ្យអ្នកណាមកធ្វើបាបនាងទៀតឡើយ!"
+                        style="width: 100%; background: #090d16; border: 1px solid #334155; color: #f8fafc; padding: 7px 10px; border-radius: 6px; font-size: 12.5px; outline: none;">
+                </div>
+
+                <!-- Modal Actions -->
+                <div class="modal-actions"
+                    style="margin-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+                    <button type="button" class="btn-mini" id="btnResetVoiceTuner"
+                        style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; padding: 8px 14px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                        <i data-lucide="rotate-ccw"></i>
+                        <span>កំណត់ដើមវិញ (Reset ដើម)</span>
+                    </button>
+                    <div style="display: flex; gap: 8px;">
+                        <button type="button" class="btn-mini" data-close="voiceTunerModal"
+                            style="padding: 8px 14px;">បិទ</button>
+                        <button type="button" class="btn-mini" id="btnSaveVoiceTuner"
+                            style="background: linear-gradient(135deg, #0284c7, #4f46e5); color: #fff; font-weight: 700; padding: 8px 18px; border-radius: 6px; border: 1px solid #38bdf8; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                            <i data-lucide="check-circle"></i>
+                            <span>រក្សាទុក & អនុវត្តបំពង់សំឡេង</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Audio BG (BGM) -->
+    <div class="modal-overlay" id="bgmModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title"><i data-lucide="music-2"></i> <span>តន្ត្រីផ្ទៃក្រោយ (Background Music)</span>
+                </div>
+                <button class="modal-close" data-close="bgmModal"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <div
+                    style="background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; border-radius: 8px; padding: 12px; margin-bottom: 14px;">
+                    <div
+                        style="font-size: 12px; color: #38bdf8; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                        <i data-lucide="lightbulb" class="icon-sm" style="color: #38bdf8;"></i>
+                        <span>វិធីសាស្ត្រផ្តាច់សំឡេងចិន ១០០% តាម AI (Vocal Remover):</span>
+                    </div>
+                    <div style="font-size: 11px; color: #94a3b8; line-height: 1.5; margin-bottom: 8px;">
+                        ចុចប៊ូតុងខាងក្រោមដើម្បីទាញយកសំឡេងវីដេអូដើមជា MP3 ក្នុងរយៈពេល ១ វិនាទី រួចយកទៅបំបែកលើ <a
+                            href="https://vocalremover.org" target="_blank"
+                            style="color: #60a5fa; text-decoration: underline;">vocalremover.org</a> ឬ CapCut
+                        ហើយយកភ្លេងដែលបំបែកស្អាតមកដាក់ចូលទីនេះវិញ។
+                    </div>
+                    <button class="btn-mini" id="btnExtractOriginalMp3"
+                        style="background: #2563eb; color: #fff; width: 100%; border: none; padding: 7px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                        <i data-lucide="download"></i> <span>ទាញយកសំឡេងវីដេអូដើមជា MP3 (Extract Audio)</span>
+                    </button>
+                </div>
+                <input type="file" id="bgmFileInput" accept="audio/*" style="display: none;">
+                <div class="form-group">
+                    <label>ជ្រើសរើសឯកសារភ្លេង BGM (MP3/WAV):</label>
+                    <button class="btn-mini" id="btnSelectBgm"><i data-lucide="folder-open"></i>
+                        ជ្រើសរើសចម្រៀង/ភ្លេង</button>
+                    <span id="bgmFileName"
+                        style="font-size: 11px; color: #94a3b8; margin-top: 4px;">មិនទាន់មានភ្លេង</span>
+                </div>
+                <div class="form-group">
+                    <label>កម្រិតសម្លេងភ្លេង BGM (%):</label>
+                    <input type="range" id="bgmVolume" min="0" max="100" value="60">
+                    <span id="bgmVolumeVal" style="font-size: 12px; color: #38bdf8;">60%</span>
+                </div>
+                <div class="form-group">
+                    <label>កម្រិតសម្លេងដើមរបស់វីដេអូចិន (%):</label>
+                    <input type="range" id="origAudioVolume" min="0" max="100" value="10">
+                    <span id="origAudioVolumeVal" style="font-size: 12px; color: #38bdf8;">10% (សម្លេងខ្យល់/SFX
+                        ស្រាលៗ)</span>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-mini" data-close="bgmModal"><i data-lucide="check"></i> យល់ព្រម</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Watermark & Logo -->
+    <div class="modal-overlay" id="watermarkModal">
+        <div class="modal-card" style="max-width: 480px;">
+            <div class="modal-header">
+                <div class="modal-title"><i data-lucide="shield-check"></i> <span>ដាក់ Logo & Watermark
+                        រក្សាកម្មសិទ្ធិវីដេអូ</span></div>
+                <button class="modal-close" data-close="watermarkModal"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <!-- Section 1: Multiple Logos Management -->
+                <div
+                    style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 12px; margin-bottom: 14px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <div
+                            style="font-weight: 600; color: #38bdf8; font-size: 13px; display: flex; align-items: center; gap: 6px;">
+                            <i data-lucide="image" class="icon-sm"></i> <span>ឡូហ្គោផ្ទាល់ខ្លួន (Logo រូបភាព ឬ Animated
+                                GIF)</span>
+                        </div>
+                        <button type="button" class="btn-mini" id="btnAddLogo"
+                            style="background: #3b82f6; color: white; border: none; padding: 4px 10px; font-weight: 600; font-size: 11.5px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                            <i data-lucide="plus" class="icon-xs"></i> <span>បន្ថែម Logo</span>
+                        </button>
+                    </div>
+                    <input type="file" id="inputLogoFile" accept="image/*,video/*" style="display: none;">
+
+                    <div style="font-size: 11px; color: #94a3b8; margin-bottom: 10px;">
+                        💡 <strong>ចំណាំ៖</strong> លោកអ្នកអាច<strong>ចុចទាញ Logo (Drag & Drop)</strong>
+                        ដោយផ្ទាល់នៅលើផ្ទាំងវីដេអូ ដើម្បីផ្លាស់ទីតាមចិត្ត និងអាចបន្ថែមបានច្រើន (២ ឬ ៣ Logo)!
+                    </div>
+
+                    <!-- List of Added Logos -->
+                    <div id="logosList"
+                        style="display: flex; flex-direction: column; gap: 8px; max-height: 220px; overflow-y: auto;">
+                        <div id="noLogosMsg"
+                            style="text-align: center; color: #64748b; font-size: 12px; padding: 14px 0;">
+                            មិនទាន់មាន Logo ទេ សូមចុច <strong>"+ បន្ថែម Logo"</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Text Watermark -->
+                <div class="form-group">
+                    <label>អក្សរឈ្មោះ Channel / Watermark:</label>
+                    <input type="text" id="watermarkInput" value="សម្រាយរឿងHD" placeholder="ឧទាហរណ៍៖ សម្រាយរឿងHD">
+                </div>
+
+                <div class="form-group"
+                    style="margin-top: 12px; background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+                    <label
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span style="font-weight: 600; color: #f1f5f9; display: flex; align-items: center; gap: 6px;"><i
+                                data-lucide="type" class="icon-sm"></i> <span>ទំហំអក្សរ Watermark (Font
+                                Size):</span></span>
+                        <span id="wmModalSizeBadge"
+                            style="background: #3b82f6; color: #fff; padding: 2px 10px; border-radius: 12px; font-weight: bold; font-size: 13px;">56px</span>
+                    </label>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <button type="button" class="btn-mini" id="btnModalWmDec"
+                            style="width: 36px; height: 36px; padding: 0; font-size: 18px; font-weight: bold; border-radius: 8px; background: #334155; color: #fff;">−</button>
+                        <input type="range" id="wmModalSlider" min="24" max="110" step="2" value="56"
+                            style="flex: 1; cursor: pointer; accent-color: #3b82f6;">
+                        <button type="button" class="btn-mini" id="btnModalWmInc"
+                            style="width: 36px; height: 36px; padding: 0; font-size: 18px; font-weight: bold; border-radius: 8px; background: #334155; color: #fff;">+</button>
+                    </div>
+                    <div
+                        style="display: flex; justify-content: space-between; font-size: 11px; color: #64748b; margin-top: 4px;">
+                        <span>តូច (24px)</span>
+                        <span style="color: #38bdf8;">ធម្មតា/ធំ (56px)</span>
+                        <span>ធំខ្លាំង (110px)</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="chkShowWatermark" checked> បង្ហាញអក្សរ Watermark លើវីដេអូ
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="chkBurnSubtitles" checked> បង្ហាញ Subtitles ភាសាខ្មែរលើវីដេអូ
+                        (Hardsub)
+                    </label>
+                </div>
+                <div class="modal-actions" style="margin-top: 16px;">
+                    <button class="btn-mini" data-close="watermarkModal"
+                        style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 7px 20px; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+                        <i data-lucide="save"></i> <span>រក្សាទុក</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Thumbnail & Movie Title Cover -->
+    <div class="modal-overlay" id="thumbnailModal">
+        <div class="modal-card" style="max-width: 840px; width: 96%;">
+            <div class="modal-header">
+                <div class="modal-title" style="display: flex; align-items: center; gap: 8px;">
+                    <i data-lucide="image" style="color: #818cf8;"></i>
+                    <span>បង្កើត Thumbnail & ចំណងជើងរឿង (Video Cover & Title)</span>
+                </div>
+                <button class="modal-close" data-close="thumbnailModal"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 16px;">
+                <div class="thumb-modal-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <!-- Left Column: Canvas Preview -->
+                    <div class="thumb-preview-col"
+                        style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; background: #0b1120; border: 1px solid #1e293b; border-radius: 8px; padding: 12px;">
+                        <div
+                            style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span
+                                style="font-size: 12px; font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 4px;">
+                                <i data-lucide="monitor" class="icon-xs"></i> ផ្ទាំងគំរូ Thumbnail (Live Preview)
+                            </span>
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span
+                                    style="font-size: 11px; background: rgba(99, 102, 241, 0.2); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.4); padding: 2px 8px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px; font-weight: 600;">
+                                    <i data-lucide="move" style="width: 12px; height: 12px;"></i> ចាប់ទាញលើរូបភាពបាន
+                                </span>
+                                <span id="thumbAspectBadge"
+                                    style="font-size: 11px; background: #1e293b; color: #38bdf8; font-weight: 700; padding: 2px 8px; border-radius: 4px; border: 1px solid #334155;">9:16</span>
+                            </div>
+                        </div>
+
+                        <!-- Canvas Container -->
+                        <div
+                            style="position: relative; width: 100%; display: flex; justify-content: center; align-items: center; min-height: 320px; max-height: 420px; overflow: hidden; background: #000; border-radius: 6px; border: 1px solid #334155;">
+                            <canvas id="thumbnailCanvas" width="1080" height="1920"
+                                style="max-width: 100%; max-height: 410px; width: auto; height: auto; object-fit: contain; display: block;"></canvas>
+                        </div>
+
+                        <!-- Quick Image Source Buttons -->
+                        <div style="display: flex; gap: 8px; width: 100%; margin-top: 10px;">
+                            <button type="button" class="btn-mini" id="btnCaptureCurrentFrame"
+                                style="flex: 1; background: #2563eb; color: #fff; padding: 7px 10px; font-size: 11.5px; border-radius: 6px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 5px; border: none; cursor: pointer;">
+                                <i data-lucide="camera" class="icon-xs"></i> Capture ពីវីដេអូ
+                            </button>
+                            <input type="file" id="inputThumbnailFile" accept="image/*" style="display: none;">
+                            <button type="button" class="btn-mini" id="btnUploadThumbImage"
+                                style="flex: 1; background: #334155; color: #f1f5f9; padding: 7px 10px; font-size: 11.5px; border-radius: 6px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 5px; border: 1px solid #475569; cursor: pointer;">
+                                <i data-lucide="upload" class="icon-xs"></i> Upload រូបភាព
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Controls & Text Inputs -->
+                    <div class="thumb-controls-col"
+                        style="display: flex; flex-direction: column; gap: 12px; overflow-y: auto; max-height: 520px; padding-right: 4px;">
+                        <!-- 1. Main Title Input -->
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label
+                                style="font-weight: 700; color: #f8fafc; font-size: 12.5px; display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                                <i data-lucide="type" class="icon-xs" style="color: #f59e0b;"></i> សរសេរចំណងជើងរឿង
+                                (Movie Title):
+                            </label>
+                            <textarea id="thumbTitleInput" rows="2"
+                                placeholder="ឧទាហរណ៍៖ មហាសេដ្ឋីក្លែងខ្លួនជាអ្នកសុំទាន"
+                                style="width: 100%; box-sizing: border-box; background: #0f172a; border: 1px solid #334155; border-radius: 6px; padding: 8px 10px; color: #fbbf24; font-size: 13.5px; font-weight: 700; outline: none; resize: vertical; line-height: 1.4;">មហាសេដ្ឋីក្លែងខ្លួនជាអ្នកសុំទាន</textarea>
+                            <div style="font-size: 10.5px; color: #94a3b8; margin-top: 2px;">💡
+                                អាចសរសេរច្រើនជួរបានដោយចុច Enter</div>
+                        </div>
+
+                        <!-- 2. Subtitle / Tagline Input & Controls -->
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label
+                                style="font-weight: 700; color: #38bdf8; font-size: 12.5px; display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                                <i data-lucide="bookmark" class="icon-xs" style="color: #38bdf8;"></i> ចំណងជើងរង / ភាគ
+                                (Tagline / Episode):
+                            </label>
+                            <input type="text" id="thumbSubInput" placeholder="ឧទាហរណ៍៖ សម្រាយរឿងពេញ | ភាគទី ០១"
+                                value="សម្រាយរឿងពេញ | ភាគទី ០១"
+                                style="width: 100%; box-sizing: border-box; background: #0f172a; border: 1px solid #334155; border-radius: 6px; padding: 7px 10px; color: #e2e8f0; font-size: 12px; outline: none;">
+
+                            <!-- Tagline Font & Size Customization Box -->
+                            <div
+                                style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 6px; padding: 10px; margin-top: 6px;">
+                                <!-- Tagline Font Picker -->
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span
+                                        style="font-size: 11.5px; color: #38bdf8; font-weight: 700; display: flex; align-items: center; gap: 4px;">
+                                        <i data-lucide="sparkles" class="icon-xs"></i> ហ្វុនអក្សរចំណងជើងរង (Tagline
+                                        Font):
+                                    </span>
+                                    <select id="thumbSubFontSelect"
+                                        style="background: #0f172a; border: 1px solid #0284c7; color: #38bdf8; font-size: 11.5px; font-weight: 700; padding: 4px 8px; border-radius: 5px; outline: none; cursor: pointer;">
+                                        <option value="Kantumruy Pro" selected>✨ Kantumruy Pro (សម័យទំនើប)</option>
+                                        <option value="Moul">👑 Moul (អក្សរឆ្លាក់ក្បាច់)</option>
+                                        <option value="Koulen">🎬 Koulen (អក្សរត្រង់ Action)</option>
+                                        <option value="Battambang">📜 Battambang (បាត់ដំបង)</option>
+                                        <option value="Dangrek">🎨 Dangrek (ដងរែក មូលស្អាត)</option>
+                                        <option value="Bayon">🏛️ Bayon (បាយ័ន បុរាណ)</option>
+                                        <option value="Fasthand">✍️ Fasthand (ក្បាច់រស់រវើក)</option>
+                                        <option value="Siemreap">🌿 Siemreap (សៀមរាប ស្រទន់)</option>
+                                        <option value="Noto Serif Khmer">📖 Noto Serif (មានជើងប្រណិត)</option>
+                                        <option value="Bokor">⛰️ Bokor (បូកគោ)</option>
+                                    </select>
+                                </div>
+
+                                <!-- Tagline Size Slider -->
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                    <span
+                                        style="font-size: 11.5px; color: #cbd5e1; font-weight: 600;">ទំហំអក្សរចំណងជើងរង
+                                        (Tagline Size):</span>
+                                    <span id="thumbSubFontSizeVal"
+                                        style="font-size: 11.5px; font-weight: 700; color: #38bdf8; background: #0f172a; border: 1px solid #334155; padding: 1px 7px; border-radius: 4px;">32px</span>
+                                </div>
+                                <input type="range" id="thumbSubFontSizeSlider" min="16" max="72" step="1" value="32"
+                                    style="width: 100%; cursor: pointer; accent-color: #38bdf8; margin-bottom: 8px;">
+
+                                <!-- Tagline Color Swatches -->
+                                <div style="display: flex; align-items: center; justify-content: space-between;">
+                                    <span
+                                        style="font-size: 11.5px; color: #cbd5e1; font-weight: 600;">ពណ៌ចំណងជើងរង:</span>
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <button type="button" class="thumb-subcolor-btn active" data-color="#ffffff"
+                                            style="width: 20px; height: 20px; border-radius: 50%; background: #ffffff; border: 2px solid #38bdf8; cursor: pointer;"
+                                            title="ពណ៌ស"></button>
+                                        <button type="button" class="thumb-subcolor-btn" data-color="#fbbf24"
+                                            style="width: 20px; height: 20px; border-radius: 50%; background: #fbbf24; border: 2px solid transparent; cursor: pointer;"
+                                            title="លឿងមាស"></button>
+                                        <button type="button" class="thumb-subcolor-btn" data-color="#38bdf8"
+                                            style="width: 20px; height: 20px; border-radius: 50%; background: #38bdf8; border: 2px solid transparent; cursor: pointer;"
+                                            title="ផ្ទៃមេឃ"></button>
+                                        <button type="button" class="thumb-subcolor-btn" data-color="#ef4444"
+                                            style="width: 20px; height: 20px; border-radius: 50%; background: #ef4444; border: 2px solid transparent; cursor: pointer;"
+                                            title="ក្រហម"></button>
+                                        <button type="button" class="thumb-subcolor-btn" data-color="#22c55e"
+                                            style="width: 20px; height: 20px; border-radius: 50%; background: #22c55e; border: 2px solid transparent; cursor: pointer;"
+                                            title="បៃតង"></button>
+                                        <input type="color" id="thumbSubColorPicker" value="#ffffff"
+                                            style="width: 22px; height: 22px; border: none; padding: 0; background: none; cursor: pointer;"
+                                            title="ជ្រើសរើសពណ៌ផ្ទាល់ខ្លួន">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. Main Title Font, Size & Color -->
+                        <div
+                            style="background: rgba(15, 23, 42, 0.6); border: 1px solid #1e293b; border-radius: 6px; padding: 10px;">
+                            <!-- Title Font Picker -->
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <span
+                                    style="font-size: 11.5px; color: #f59e0b; font-weight: 700; display: flex; align-items: center; gap: 4px;">
+                                    <i data-lucide="crown" class="icon-xs"></i> ហ្វុនចំណងជើងធំ (Title Font):
+                                </span>
+                                <select id="thumbTitleFontSelect"
+                                    style="background: #0f172a; border: 1px solid #d97706; color: #fbbf24; font-size: 11.5px; font-weight: 700; padding: 4px 8px; border-radius: 5px; outline: none; cursor: pointer;">
+                                    <option value="Moul">👑 Moul (អក្សរឆ្លាក់ក្បាច់ - ណែនាំ)</option>
+                                    <option value="Kantumruy Pro" selected>✨ Kantumruy Pro (សម័យទំនើប)</option>
+                                    <option value="Koulen">🎬 Koulen (អក្សរត្រង់ Action)</option>
+                                    <option value="Battambang">📜 Battambang (បាត់ដំបង)</option>
+                                    <option value="Dangrek">🎨 Dangrek (ដងរែក មូលស្អាត)</option>
+                                    <option value="Bayon">🏛️ Bayon (បាយ័ន បុរាណ)</option>
+                                    <option value="Fasthand">✍️ Fasthand (ក្បាច់រស់រវើក)</option>
+                                    <option value="Siemreap">🌿 Siemreap (សៀមរាប ស្រទន់)</option>
+                                    <option value="Noto Serif Khmer">📖 Noto Serif (មានជើងប្រណិត)</option>
+                                    <option value="Bokor">⛰️ Bokor (បូកគោ)</option>
+                                </select>
+                            </div>
+
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-size: 11.5px; color: #94a3b8; font-weight: 600;">ទំហំអក្សរចំណងជើងធំ
+                                    (Title Size):</span>
+                                <span id="thumbFontSizeVal"
+                                    style="font-size: 12px; font-weight: 700; color: #f59e0b; background: #1e293b; padding: 1px 6px; border-radius: 4px;">64px</span>
+                            </div>
+                            <input type="range" id="thumbFontSizeSlider" min="32" max="110" step="2" value="64"
+                                style="width: 100%; cursor: pointer; accent-color: #f59e0b; margin-bottom: 10px;">
+
+                            <!-- Color Palette Swatches -->
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <span style="font-size: 11.5px; color: #94a3b8; font-weight: 600;">ពណ៌ចំណងជើងធំ:</span>
+                                <div style="display: flex; align-items: center; gap: 6px;">
+                                    <button type="button" class="thumb-color-btn active" data-color="#fbbf24"
+                                        style="width: 22px; height: 22px; border-radius: 50%; background: #fbbf24; border: 2px solid #fff; cursor: pointer;"
+                                        title="លឿងមាស"></button>
+                                    <button type="button" class="thumb-color-btn" data-color="#ffffff"
+                                        style="width: 22px; height: 22px; border-radius: 50%; background: #ffffff; border: 2px solid transparent; cursor: pointer;"
+                                        title="ពណ៌ស"></button>
+                                    <button type="button" class="thumb-color-btn" data-color="#ef4444"
+                                        style="width: 22px; height: 22px; border-radius: 50%; background: #ef4444; border: 2px solid transparent; cursor: pointer;"
+                                        title="ពណ៌ក្រហម"></button>
+                                    <button type="button" class="thumb-color-btn" data-color="#38bdf8"
+                                        style="width: 22px; height: 22px; border-radius: 50%; background: #38bdf8; border: 2px solid transparent; cursor: pointer;"
+                                        title="ផ្ទៃមេឃ"></button>
+                                    <button type="button" class="thumb-color-btn" data-color="#22c55e"
+                                        style="width: 22px; height: 22px; border-radius: 50%; background: #22c55e; border: 2px solid transparent; cursor: pointer;"
+                                        title="បៃតង"></button>
+                                    <input type="color" id="thumbColorPicker" value="#fbbf24"
+                                        style="width: 24px; height: 24px; border: none; padding: 0; background: none; cursor: pointer;"
+                                        title="ជ្រើសរើសពណ៌ផ្ទាល់ខ្លួន">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Text Position & Box Style -->
+                        <div
+                            style="background: rgba(15, 23, 42, 0.6); border: 1px solid #1e293b; border-radius: 6px; padding: 10px;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <div style="display: flex; align-items: center; gap: 6px;">
+                                    <span style="font-size: 11.5px; color: #94a3b8; font-weight: 600;">ទីតាំងអក្សរ
+                                        (Position):</span>
+                                    <span id="thumbPosVal"
+                                        style="font-size: 11px; font-weight: 700; color: #818cf8; background: #1e1b4b; padding: 1px 6px; border-radius: 4px; border: 1px solid #4f46e5;">48%</span>
+                                </div>
+                                <div style="display: flex; gap: 4px;">
+                                    <button type="button" class="btn-mini thumb-pos-preset" data-pos="top"
+                                        style="padding: 2px 7px; font-size: 11px; background: #1e293b; border: 1px solid #334155; color: #cbd5e1; border-radius: 4px; cursor: pointer;">លើ</button>
+                                    <button type="button" class="btn-mini thumb-pos-preset active" data-pos="center"
+                                        style="padding: 2px 7px; font-size: 11px; background: #4338ca; border: 1px solid #6366f1; color: #fff; border-radius: 4px; cursor: pointer;">កណ្តាល</button>
+                                    <button type="button" class="btn-mini thumb-pos-preset" data-pos="bottom"
+                                        style="padding: 2px 7px; font-size: 11px; background: #1e293b; border: 1px solid #334155; color: #cbd5e1; border-radius: 4px; cursor: pointer;">ក្រោម</button>
+                                </div>
+                            </div>
+                            <input type="range" id="thumbPosYSlider" min="10" max="90" step="1" value="48"
+                                style="width: 100%; cursor: pointer; accent-color: #6366f1;">
+                            <div
+                                style="font-size: 10.5px; color: #94a3b8; margin-top: 3px; display: flex; justify-content: space-between; align-items: center;">
+                                <span>⬆️ ខាងលើ (10%)</span>
+                                <span style="color: #a5b4fc; font-weight: 600;">✨ អាចចុចចាប់ទាញ (Drag) លើផ្ទាំង Preview
+                                    ផ្ទាល់</span>
+                                <span>⬇️ ខាងក្រោម (90%)</span>
+                            </div>
+
+                            <div
+                                style="margin-top: 8px; display: flex; align-items: center; justify-content: space-between;">
+                                <span style="font-size: 11.5px; color: #94a3b8; font-weight: 600;">ផ្ទៃទ្រនាប់អក្សរ
+                                    (Ribbon):</span>
+                                <select id="thumbBoxStyle"
+                                    style="background: #0f172a; border: 1px solid #334155; color: #f1f5f9; font-size: 11px; padding: 3px 6px; border-radius: 4px; outline: none;">
+                                    <option value="ribbon">ខ្មៅស្ដើងដិត (Black Ribbon) - ណែនាំ</option>
+                                    <option value="gradient">Gradient ស្រមោលរលោង (Cinematic)</option>
+                                    <option value="none">Outline ខ្មៅសុទ្ធ (Text Outline Only)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 5. Cover Option for Export -->
+                        <div
+                            style="background: rgba(99, 102, 241, 0.12); border: 1px solid rgba(99, 102, 241, 0.35); border-radius: 6px; padding: 10px;">
+                            <label
+                                style="display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: #c7d2fe; cursor: pointer; user-select: none;">
+                                <input type="checkbox" id="chkInsertCoverVideo" checked
+                                    style="margin-top: 2px; accent-color: #6366f1; width: 16px; height: 16px;">
+                                <div>
+                                    <span style="font-weight: 700; color: #a5b4fc;"><i data-lucide="clapperboard"
+                                            class="icon-xs"></i> ដាក់ Thumbnail នេះជា Cover ខាងមុខវីដេអូ</span>
+                                    <div style="font-size: 10.5px; color: #94a3b8; margin-top: 2px;">
+                                        ពេល Render ចប់ វីដេអូនឹងមានរូប Thumbnail នេះនៅវិនាទី 00:00 ធ្វើឱ្យ Facebook
+                                        Reels, TikTok និង YouTube បង្ហាញចំណងជើងរឿងនេះភ្លាមៗ!
+                                    </div>
+                                </div>
+                            </label>
+                            <div
+                                style="display: flex; align-items: center; justify-content: flex-end; gap: 6px; margin-top: 6px;">
+                                <span style="font-size: 11px; color: #94a3b8;">រយៈពេល Cover:</span>
+                                <select id="thumbCoverDuration"
+                                    style="background: #1e1b4b; border: 1px solid #6366f1; color: #a5b4fc; font-size: 11px; padding: 2px 6px; border-radius: 4px;">
+                                    <option value="0.5">0.5 វិនាទី (លឿន)</option>
+                                    <option value="0.8" selected>0.8 វិនាទី (សមល្មម)</option>
+                                    <option value="1.2">1.2 វិនាទី (ច្បាស់)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Actions -->
+                <div class="modal-actions"
+                    style="margin-top: 14px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 12px;">
+                    <button type="button" class="btn-mini" id="btnDownloadThumbnail"
+                        style="background: #0284c7; color: white; border: none; padding: 7px 16px; font-weight: 600; font-size: 12px; border-radius: 6px; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                        <i data-lucide="download"></i> <span>ទាញយករូប Thumbnail (PNG)</span>
+                    </button>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn-mini" data-close="thumbnailModal"
+                            style="background: #334155; border: none; padding: 7px 16px; font-size: 12px; border-radius: 6px; color: #cbd5e1; cursor: pointer;">បោះបង់</button>
+                        <button type="button" class="btn-mini" id="btnSaveThumbnail"
+                            style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 7px 22px; font-weight: 700; font-size: 12.5px; border-radius: 6px; display: flex; align-items: center; gap: 6px; cursor: pointer; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
+                            <i data-lucide="check"></i> <span>យល់ព្រម & រក្សាទុក</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Export Video Options -->
+    <div class="modal-overlay" id="exportModal">
+        <div class="modal-card export-modal-card" style="max-width: 530px; width: 95%;">
+            <div class="modal-header">
+                <div class="modal-title"><i data-lucide="film"></i> <span>ជម្រើសក្នុងការទាញយក និង Render វីដេអូ</span>
+                </div>
+                <button class="modal-close" data-close="exportModal"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body export-modal-body">
+                <!-- Preset Format Options Grid -->
+                <div style="font-size: 13px; font-weight: 700; color: #94a3b8; margin-bottom: 10px;">
+                    ជ្រើសរើសទម្រង់កម្រិតវីដេអូ (Video Resolution):</div>
+                <div class="export-options-grid">
+                    <label class="export-card active">
+                        <input type="radio" name="exportResolution" value="1080p" checked>
+                        <div class="export-card-icon"><i data-lucide="sparkles"
+                                style="color: #fbbf24; width: 26px; height: 26px;"></i></div>
+                        <div class="export-card-title">Full HD 1080p</div>
+                        <div class="export-card-desc">ច្បាស់ល្អឥតខ្ចោះ ស័ក្តិសមសម្រាប់ YouTube & Facebook</div>
+                    </label>
+
+                    <label class="export-card">
+                        <input type="radio" name="exportResolution" value="720p">
+                        <div class="export-card-icon"><i data-lucide="zap"
+                                style="color: #38bdf8; width: 26px; height: 26px;"></i></div>
+                        <div class="export-card-title">HD 720p</div>
+                        <div class="export-card-desc">Render លឿន ទំហំឯកសារស្រាល សម្រាប់ TikTok & Reels</div>
+                    </label>
+
+                    <label class="export-card">
+                        <input type="radio" name="exportResolution" value="original">
+                        <div class="export-card-icon"><i data-lucide="film"
+                                style="color: #a855f7; width: 26px; height: 26px;"></i></div>
+                        <div class="export-card-title">Original (ដើម)</div>
+                        <div class="export-card-desc">រក្សាទំហំនិងគុណភាពវីដេអូដើម ១០០%</div>
+                    </label>
+                </div>
+
+                <!-- Aspect Ratio & Social Media Presets -->
+                <div class="form-group" style="margin-top: 14px;">
+                    <label style="font-size: 13px; font-weight: 700; color: #94a3b8;">ទំហំខ្នាតវីដេអូសម្រាប់ Social
+                        Media (Aspect Ratio):</label>
+                    <select id="exportAspectRatio" class="modal-select">
+                        <option value="original">ទំហំដើម (Original Video Ratio)</option>
+                        <option value="9:16">ទម្រង់បញ្ឈរ 9:16 (TikTok, Facebook Reels, YouTube Shorts)</option>
+                        <option value="16:9">ទម្រង់ផ្តេក 16:9 (YouTube, Facebook Watch)</option>
+                        <option value="1:1">ទម្រង់ការ៉េ 1:1 (Facebook Feed, Instagram)</option>
+                    </select>
+                </div>
+
+                <!-- Export Custom Checkboxes -->
+                <div class="export-checkbox-list"
+                    style="margin-top: 14px; background: rgba(15, 23, 42, 0.4); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+                    <label class="checkbox-row" id="rowModalChkKeepOrig">
+                        <input type="checkbox" id="modalChkKeepOrig">
+                        <span><i data-lucide="volume-2" class="icon-sm"></i> រក្សាទុកសម្លេង Background របស់វីដេអូដើម
+                            (Original Audio BG)</span>
+                    </label>
+                    <label class="checkbox-row" id="rowModalChkBgm">
+                        <input type="checkbox" id="modalChkBgm">
+                        <span><i data-lucide="music-2" class="icon-sm"></i> ដាក់ភ្លេងកំដរ Background Music (BGM)</span>
+                    </label>
+                    <label class="checkbox-row">
+                        <input type="checkbox" id="modalChkBurnSub" checked>
+                        <span><i data-lucide="subtitles" class="icon-sm"></i> បង្កប់ Subtitle ខ្មែរលើវីដេអូ (Burn
+                            Hardsub)</span>
+                    </label>
+                    <label class="checkbox-row">
+                        <input type="checkbox" id="modalChkWatermark" checked>
+                        <span><i data-lucide="shield-check" class="icon-sm"></i> ដាក់ Watermark / Logo លើវីដេអូ</span>
+                    </label>
+                    <label class="checkbox-row" id="rowModalChkThumbCover"
+                        style="background: rgba(99, 102, 241, 0.12); border: 1px solid rgba(99, 102, 241, 0.35); border-radius: 6px; padding: 6px 10px;">
+                        <input type="checkbox" id="modalChkThumbnailCover">
+                        <span style="color: #c7d2fe; font-weight: 600;"><i data-lucide="image" class="icon-sm"></i>
+                            បង្កប់រូប Thumbnail / ចំណងជើងរឿងនៅដើមវីដេអូ (Video Cover)</span>
+                    </label>
+                    <label class="checkbox-row"
+                        style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 6px; padding: 6px 10px;">
+                        <input type="checkbox" id="modalChkSmartCrop">
+                        <span style="color: #6ee7b7; font-weight: 600;"><i data-lucide="scissors" class="icon-sm"></i>
+                            Smart Crop កាត់លុបអក្សរចិនចេញស្អាត ១០០% (Lossless Zoom)</span>
+                    </label>
+                    <label class="checkbox-row">
+                        <input type="checkbox" id="modalChkMaskChinese">
+                        <span><i data-lucide="scan-line" class="icon-sm"></i> ធ្វើឱ្យព្រិល / បិទបាំងអក្សរចិនដើម
+                            (Blur/Cover Chinese Subtitles)</span>
+                    </label>
+                </div>
+
+                <!-- Export Output Destination Folder Card -->
+                <div class="export-destination-card"
+                    style="margin-top: 14px; background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 8px; padding: 12px 14px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <label
+                            style="font-size: 12.5px; font-weight: 700; color: #e2e8f0; display: flex; align-items: center; gap: 7px;">
+                            <i data-lucide="folder-output" style="color: #38bdf8; width: 16px; height: 16px;"></i>
+                            <span>ទីតាំងរក្សាទុកវីដេអូ (Output Folder)៖</span>
+                        </label>
+                        <button type="button" id="btnExploreOutputDir" class="btn-dest-explore"
+                            style="background: transparent; border: none; color: #38bdf8; font-size: 11.5px; cursor: pointer; display: flex; align-items: center; gap: 4px; padding: 2px 6px; border-radius: 4px; transition: all 0.2s;"
+                            title="បើកមើល Folder នេះក្នុង Windows File Explorer">
+                            <i data-lucide="external-link" style="width: 12px; height: 12px;"></i>
+                            <span>បើកមើល Folder</span>
+                        </button>
+                    </div>
+
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                        <div style="position: relative; flex: 1;">
+                            <input type="text" id="exportOutputDirInput"
+                                style="width: 100%; background: #0f172a; border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; padding: 8px 12px; border-radius: 6px; font-size: 12px; font-family: monospace; outline: none; transition: border-color 0.2s;"
+                                placeholder="C:\សម្រាយរឿង\outputs" spellcheck="false" autocomplete="off">
+                        </div>
+                        <button type="button" id="btnBrowseOutputDir"
+                            style="background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border: none; padding: 8px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; white-space: nowrap; box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);"
+                            title="ជ្រើសរើស Folder លើកុំព្យូទ័រតាមរយៈ Windows">
+                            <i data-lucide="folder-search" style="width: 14px; height: 14px;"></i>
+                            <span>ជ្រើសរើស Folder...</span>
+                        </button>
+                    </div>
+
+                    <!-- Live Folder Status Confirmation Badge -->
+                    <div id="exportFolderStatusBadge"
+                        style="font-size: 11px; color: #38bdf8; margin-top: 6px; display: flex; align-items: center; gap: 5px;">
+                        <i data-lucide="check-circle" style="width: 12px; height: 12px; color: #10b981;"></i>
+                        <span id="exportFolderStatusText">វីដេអូដែល Render រួច នឹងត្រូវរក្សាទុកក្នុង Folder នេះ</span>
+                    </div>
+
+                    <!-- Drive & Preset Shortcut Pills -->
+                    <div
+                        style="display: flex; flex-direction: column; gap: 7px; margin-top: 9px; padding-top: 8px; border-top: 1px dashed rgba(255, 255, 255, 0.08);">
+                        <!-- Dynamic Drives Shortcuts -->
+                        <div id="driveShortcutsContainer"
+                            style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                            <span
+                                style="font-size: 11px; color: #38bdf8; font-weight: 600; display: flex; align-items: center; gap: 4px;">
+                                <i data-lucide="hard-drive" style="width: 12px; height: 12px; color: #38bdf8;"></i>
+                                <span>Drives កុំព្យូទ័រ៖</span>
+                            </span>
+                            <div id="driveShortcutButtons" style="display: inline-flex; gap: 5px; flex-wrap: wrap;">
+                                <!-- Dynamic Drive Pills injected by JS: Drive C:, Drive D:, etc. -->
+                            </div>
+                        </div>
+
+                        <!-- Standard Folder Shortcuts -->
+                        <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                            <span
+                                style="font-size: 11px; color: #94a3b8; display: flex; align-items: center; gap: 3px;">
+                                <i data-lucide="corner-down-right" style="width: 11px; height: 11px;"></i>
+                                <span>ផ្លូវកាត់ Folder៖</span>
+                            </span>
+                            <button type="button" class="dest-preset-btn" data-preset="outputs"
+                                style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); color: #cbd5e1; font-size: 11px; padding: 3px 8px; border-radius: 4px; cursor: pointer;">
+                                📁 outputs
+                            </button>
+                            <button type="button" class="dest-preset-btn" data-preset="desktop"
+                                style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); color: #cbd5e1; font-size: 11px; padding: 3px 8px; border-radius: 4px; cursor: pointer;">
+                                🖥️ Desktop
+                            </button>
+                            <button type="button" class="dest-preset-btn" data-preset="downloads"
+                                style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); color: #cbd5e1; font-size: 11px; padding: 3px 8px; border-radius: 4px; cursor: pointer;">
+                                📥 Downloads
+                            </button>
+                            <button type="button" class="dest-preset-btn" data-preset="videos"
+                                style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); color: #cbd5e1; font-size: 11px; padding: 3px 8px; border-radius: 4px; cursor: pointer;">
+                                🎬 Videos
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fixed Pinned Footer (Never scrolls off screen!) -->
+            <div class="modal-actions export-modal-actions"
+                style="display: flex; justify-content: space-between; align-items: center; gap: 10px; border-top: 1px solid rgba(255,255,255,0.08); padding: 14px 20px; background: #0f172a; flex-shrink: 0;">
+                <!-- Bottom-Left Folder Setting Button -->
+                <button type="button" id="btnFooterChooseFolder"
+                    style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; padding: 8px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.2s;"
+                    title="ចុចដើម្បីកំណត់ទីតាំង Folder សម្រាប់រក្សាទុកវីដេអូ">
+                    <i data-lucide="folder-cog" style="width: 15px; height: 15px; color: #38bdf8;"></i>
+                    <span>ទីតាំង File៖ <span id="lblShortFolder"
+                            style="color: #f1f5f9; font-family: monospace;">outputs</span></span>
+                </button>
+
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <button class="btn-mini" data-close="exportModal"
+                        style="background: #334155; border: none; padding: 8px 16px; color: #cbd5e1; border-radius: 6px; cursor: pointer;">បោះបង់</button>
+                    <button class="btn-mini" id="btnConfirmExport"
+                        style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 8px 22px; font-weight: 700; font-size: 13px; border-radius: 6px; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35); display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                        <i data-lucide="download"></i> <span>ចាប់ផ្តើមទាញយក (Render Video)</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Profile Edit (Next-Gen Studio Creator Card) -->
+    <div class="modal-overlay" id="profileModal">
+        <div class="modal-card profile-modal-card">
+            <!-- Decorative Studio Header Banner -->
+            <div class="profile-card-banner">
+                <div class="profile-banner-decor">
+                    <span class="banner-chip"><i data-lucide="sparkles"></i> Vocal Studio Creator</span>
+                    <button class="modal-close banner-close" data-close="profileModal" title="បិទ"><i
+                            data-lucide="x"></i></button>
+                </div>
+            </div>
+
+            <!-- Profile Body with Overlapping Avatar -->
+            <div class="profile-card-body">
+                <!-- Avatar Section -->
+                <div class="profile-avatar-wrapper">
+                    <div class="profile-avatar-ring" id="modalAvatarPreview"
+                        onclick="document.getElementById('profileAvatarInput').click();"
+                        title="ចុចដើម្បីប្តូររូបភាព Profile របស់អ្នក">
+                        <img id="modalAvatarImg" src="" alt="Profile Photo" style="display: none;">
+                        <div id="modalAvatarPlaceholder" class="profile-avatar-placeholder">
+                            <i data-lucide="user"></i>
+                        </div>
+                        <!-- Floating Camera Badge -->
+                        <div class="avatar-camera-badge" title="ជ្រើសរើសរូបថតថ្មី">
+                            <i data-lucide="camera"></i>
+                        </div>
+                    </div>
+                    <input type="file" id="profileAvatarInput" accept="image/*" style="display: none;">
+                </div>
+
+                <!-- Live Identity Display -->
+                <div class="profile-identity">
+                    <h3 class="profile-name-preview" id="profileNamePreview">LY PYLAN</h3>
+                    <div class="profile-badge-row">
+                        <span class="role-badge role-badge-creator"><i data-lucide="film"></i> អ្នកសម្រាយរឿង</span>
+                        <span class="role-badge role-badge-pro"><i data-lucide="crown"></i> Free Edition • Pro</span>
+                    </div>
+                </div>
+
+                <!-- Quick Action Buttons for Photo -->
+                <div class="avatar-quick-actions">
+                    <button type="button" class="btn-avatar-action"
+                        onclick="document.getElementById('profileAvatarInput').click();">
+                        <i data-lucide="upload-cloud"></i> <span>ផ្ទុករូបភាពថ្មី</span>
+                    </button>
+                    <button type="button" class="btn-avatar-action btn-avatar-reset" id="btnResetAvatar"
+                        title="លុបរូបភាព និងប្រើរូប Icon ដើមវិញ">
+                        <i data-lucide="trash-2"></i> <span>លុបរូប</span>
+                    </button>
+                </div>
+
+                <!-- Input Form Fields -->
+                <div class="profile-form-group">
+                    <label class="profile-field-label">
+                        <i data-lucide="user-check"></i> <span>ឈ្មោះ Profile (Creator Name)៖</span>
+                    </label>
+                    <div class="profile-input-box">
+                        <i data-lucide="user" class="input-icon"></i>
+                        <input type="text" id="inputModalProfileName" value="LY PYLAN"
+                            placeholder="បញ្ចូលឈ្មោះរបស់អ្នក..." maxlength="30">
+                    </div>
+                </div>
+
+                <div class="profile-form-group">
+                    <label class="profile-field-label">
+                        <i data-lucide="tv"></i> <span>ឈ្មោះ Studio / Channel (Watermark Title)៖</span>
+                    </label>
+                    <div class="profile-input-box">
+                        <i data-lucide="clapperboard" class="input-icon"></i>
+                        <input type="text" id="inputModalProfileStudio" value="សម្រាយរឿង HD"
+                            placeholder="ឧទាហរណ៍៖ LY PYLAN Studio, សម្រាយរឿង HD..." maxlength="40">
+                    </div>
+                </div>
+
+                <!-- Quick Preset Avatars Selection -->
+                <div class="preset-avatars-section">
+                    <span class="preset-label"><i data-lucide="smile"></i> រូបភាពគំរូស្អាតៗ (Presets)៖</span>
+                    <div class="preset-avatar-list">
+                        <button type="button" class="preset-avatar-btn" data-preset="🎬"
+                            title="Director Clapperboard">🎬</button>
+                        <button type="button" class="preset-avatar-btn" data-preset="🎙️"
+                            title="Studio Microphone">🎙️</button>
+                        <button type="button" class="preset-avatar-btn" data-preset="🐺" title="Golden Wolf">🐺</button>
+                        <button type="button" class="preset-avatar-btn" data-preset="👑"
+                            title="Golden Crown">👑</button>
+                        <button type="button" class="preset-avatar-btn" data-preset="⚡"
+                            title="Cyber Lightning">⚡</button>
+                    </div>
+                </div>
+
+                <!-- Modal Actions Footer -->
+                <div class="profile-actions-footer">
+                    <button type="button" class="btn-profile-cancel" data-close="profileModal">
+                        <i data-lucide="x"></i> <span>បោះបង់</span>
+                    </button>
+                    <button type="button" class="btn-profile-save" id="btnSaveProfile">
+                        <i data-lucide="check"></i> <span>រក្សាទុក Profile</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Settings -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-card"
+            style="max-width:600px; max-height:90vh; display:flex; flex-direction:column; padding:0; overflow:hidden;">
+
+            <!-- ── Sticky Header ── -->
+            <div class="modal-header" style="flex-shrink:0; padding:14px 18px; border-bottom:1px solid #1e293b;">
+                <div class="modal-title"><i data-lucide="settings"></i> <span>ការកំណត់ប្រព័ន្ធ (Settings)</span></div>
+                <button class="modal-close" data-close="settingsModal"><i data-lucide="x"></i></button>
+            </div>
+
+            <!-- ── Scrollable Body ── -->
+            <div class="modal-body"
+                style="flex:1; overflow-y:auto; padding:16px 18px 8px; scrollbar-width:thin; scrollbar-color:#334155 #0f172a;">
+
+                <!-- Profile -->
+                <div
+                    style="font-size:11px;font-weight:700;text-transform:uppercase;color:#64748b;letter-spacing:1px;margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+                    <i data-lucide="user" class="icon-sm"></i> <span>Profile</span>
+                </div>
+                <div class="form-group">
+                    <label>ឈ្មោះអ្នកប្រើ (Profile Name):</label>
+                    <input type="text" id="inputProfileName" value="VANNTHAN">
+                </div>
+                <div class="form-group">
+                    <label>រចនាបថសម្រាយរឿង (Movie Recap Style):</label>
+                    <select id="selectRecapStyle">
+                        <option value="true" selected>បើក (សម្រាយបែបធម្មជាតិ)</option>
+                        <option value="false">បិទ (បកប្រែចំៗ)</option>
+                    </select>
+                </div>
+
+                <hr style="border:none;border-top:1px solid #1e293b;margin:14px 0;">
+
+                <!-- API Keys -->
+                <div
+                    style="font-size:11px;font-weight:700;text-transform:uppercase;color:#64748b;letter-spacing:1px;margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+                    <i data-lucide="key-round" class="icon-sm"></i> <span>API Keys សម្រាប់បកប្រែ</span>
+                </div>
+                <div style="font-size:11px;color:#94a3b8;margin-bottom:12px;line-height:1.6;">
+                    ដាក់ API Key ខាងក្រោម ដើម្បីប្រើប្រាស់សេវាបកប្រែល្អប្រសើរ។<br>
+                    <span style="color:#f59e0b;">⚠ គ្មាន Key → ប្រើ Google Free (dict-chrome-ex) ជំនួស។</span>
+                </div>
+
+                <!-- Google Cloud -->
+                <div class="form-group" style="margin-bottom:12px;">
+                    <label style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
+                        <i data-lucide="cloud" class="icon-sm" style="color:#38bdf8;"></i> <strong>Google Cloud
+                            Translation API Key</strong>
+                        <a href="https://console.cloud.google.com/apis/library/translate.googleapis.com" target="_blank"
+                            style="color:#60a5fa;font-size:10px;">[Get Key]</a>
+                    </label>
+                    <div style="display:flex;gap:6px;">
+                        <input type="password" id="apiKeyGoogle" placeholder="AIza..."
+                            style="flex:1;font-family:monospace;font-size:12px;">
+                        <button class="btn-mini" onclick="toggleApiKeyVisibility('apiKeyGoogle',this)"
+                            style="padding:5px 10px;min-width:36px;"><i data-lucide="eye" class="icon-xs"></i></button>
+                    </div>
+                    <div style="font-size:10px;color:#64748b;margin-top:3px;">Neural MT · 500,000 chars/month ឥតគិតថ្លៃ
+                    </div>
+                </div>
+
+                <!-- DeepL -->
+                <div class="form-group" style="margin-bottom:12px;">
+                    <label style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
+                        <i data-lucide="globe" class="icon-sm" style="color:#60a5fa;"></i> <strong>DeepL API
+                            Key</strong>
+                        <a href="https://www.deepl.com/pro-api" target="_blank"
+                            style="color:#60a5fa;font-size:10px;">[Get Key]</a>
+                    </label>
+                    <div style="display:flex;gap:6px;">
+                        <input type="password" id="apiKeyDeepL" placeholder="xxxxxxxx-xxxx-xxxx-xxxx:fx"
+                            style="flex:1;font-family:monospace;font-size:12px;">
+                        <button class="btn-mini" onclick="toggleApiKeyVisibility('apiKeyDeepL',this)"
+                            style="padding:5px 10px;min-width:36px;"><i data-lucide="eye" class="icon-xs"></i></button>
+                    </div>
+                    <div style="font-size:10px;color:#64748b;margin-top:3px;">គុណភាពខ្ពស់ · Free tier 500K chars/month
+                    </div>
+                </div>
+
+                <!-- Gemini -->
+                <div class="form-group" style="margin-bottom:12px;">
+                    <label style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
+                        <i data-lucide="sparkles" class="icon-sm" style="color:#fbbf24;"></i> <strong>Google Gemini API
+                            Key</strong>
+                        <a href="https://aistudio.google.com/app/apikey" target="_blank"
+                            style="color:#60a5fa;font-size:10px;">[Get Free Key ★]</a>
+                    </label>
+                    <div style="display:flex;gap:6px;">
+                        <input type="password" id="apiKeyGemini" placeholder="AIza..."
+                            style="flex:1;font-family:monospace;font-size:12px;">
+                        <button class="btn-mini" onclick="toggleApiKeyVisibility('apiKeyGemini',this)"
+                            style="padding:5px 10px;min-width:36px;"><i data-lucide="eye" class="icon-xs"></i></button>
+                    </div>
+                    <div style="font-size:10px;color:#64748b;margin-top:3px;">AI Translation · Context-aware · Free tier
+                        available ★ ណែនាំ</div>
+                </div>
+
+                <!-- OpenAI -->
+                <div class="form-group" style="margin-bottom:12px;">
+                    <label style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
+                        <i data-lucide="bot" class="icon-sm" style="color:#34d399;"></i> <strong>OpenAI API Key
+                            (GPT-4o-mini)</strong>
+                        <a href="https://platform.openai.com/api-keys" target="_blank"
+                            style="color:#60a5fa;font-size:10px;">[Get Key]</a>
+                    </label>
+                    <div style="display:flex;gap:6px;">
+                        <input type="password" id="apiKeyOpenAI" placeholder="sk-proj-..."
+                            style="flex:1;font-family:monospace;font-size:12px;">
+                        <button class="btn-mini" onclick="toggleApiKeyVisibility('apiKeyOpenAI',this)"
+                            style="padding:5px 10px;min-width:36px;"><i data-lucide="eye" class="icon-xs"></i></button>
+                    </div>
+                    <div style="font-size:10px;color:#64748b;margin-top:3px;">ChatGPT · ត្រូវការ Credit</div>
+                </div>
+
+                <!-- Priority -->
+                <div class="form-group" style="margin-bottom:12px;">
+                    <label style="margin-bottom:5px;display:flex; align-items:center; gap:6px;"><i
+                            data-lucide="arrow-down-up" class="icon-sm"></i> <span>សេវាបកប្រែ (Priority
+                            Order):</span></label>
+                    <select id="selectTranslatePriority">
+                        <option value="auto">Auto (ប្រើ Key ដែលបានដាក់ → Google Free Fallback)</option>
+                        <option value="gemini">Gemini AI (ណែនាំ)</option>
+                        <option value="google_cloud">Google Cloud API</option>
+                        <option value="deepl">DeepL API</option>
+                        <option value="openai">OpenAI GPT</option>
+                        <option value="free_only">Google Free Only (មិនចំណាយ)</option>
+                    </select>
+                </div>
+
+                <!-- Status -->
+                <div id="apiKeyStatus"
+                    style="margin-top:8px;padding:8px 12px;border-radius:6px;font-size:12px;display:none;"></div>
+            </div>
+
+            <!-- ── Sticky Footer with Buttons ── -->
+            <div
+                style="flex-shrink:0; padding:12px 18px; border-top:1px solid #1e293b; background:#0f172a; display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                <button class="btn-mini" onclick="testTranslationAPI()"
+                    style="background:#1e3a5f;border:none;padding:8px 14px;font-size:12px;border-radius:6px; display:flex; align-items:center; gap:6px;">
+                    <i data-lucide="flask-conical"></i> <span>សាកល្បង</span>
+                </button>
+                <div style="display:flex;gap:8px;">
+                    <button class="btn-mini" data-close="settingsModal"
+                        style="padding:8px 16px;font-size:12px;border-radius:6px; display:flex; align-items:center; gap:6px;">
+                        <i data-lucide="x"></i> <span>បិទ</span>
+                    </button>
+                    <button class="btn-mini" onclick="saveAPISettings()"
+                        style="background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;padding:8px 22px;font-weight:700;font-size:13px;border-radius:6px;cursor:pointer; display:flex; align-items:center; gap:6px;">
+                        <i data-lucide="save"></i> <span>រក្សាទុក</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal: Paste Project Text Box -->
+    <div class="modal-overlay" id="pasteModal">
+        <div class="modal-card" style="max-width: 650px;">
+            <div class="modal-header">
+                <div class="modal-title"><i data-lucide="clipboard-paste"></i> <span>បញ្ចូលអត្ថបទថ្មីគ្មានដែនកំណត់
+                        (Paste All Project)</span></div>
+                <button class="modal-close" data-close="pasteModal"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <div style="font-size: 12.5px; color: #94a3b8; margin-bottom: 8px;">
+                    សូមចុចលើប្រអប់ខាងក្រោម រួចចុច <strong>Ctrl + V</strong> (Paste) អត្ថបទ ឬ JSON ដែលបានចម្លង
+                    ដើម្បី<strong>ជំនួសអត្ថបទចាស់ចេញទាំងអស់ និងដាក់អត្ថបទថ្មីចូលតារាង</strong> (គាំទ្ររាប់រយ
+                    ឬរាប់ពាន់បន្ទាត់)៖
+                </div>
+                <textarea id="txtPasteInput" rows="12"
+                    placeholder="ចុច Ctrl + V ដើម្បី Paste ទិន្នន័យថ្មីនៅទីនេះ (គាំទ្រទិន្នន័យច្រើនគ្មានដែនកំណត់)..."
+                    style="width: 100%; box-sizing: border-box; background: #0f172a; color: #e2e8f0; border: 1px solid #334155; border-radius: 6px; padding: 10px; font-family: monospace; font-size: 11.5px; resize: vertical; outline: none;"></textarea>
+                <div class="modal-actions"
+                    style="margin-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+                    <button type="button" id="btnClearPasteInput" class="btn-mini"
+                        style="background: #475569; border: none; padding: 6px 12px; font-size: 11px; display: flex; align-items: center; gap: 4px;">
+                        <i data-lucide="trash-2"></i> <span>សម្អាតប្រអប់ (Clear)</span>
+                    </button>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn-mini" data-close="pasteModal"
+                            style="background: #334155; border: none; padding: 7px 16px;">បោះបង់</button>
+                        <button class="btn-mini" id="btnConfirmPaste"
+                            style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 7px 20px; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+                            <i data-lucide="arrow-down-to-line"></i> <span>ដាក់ចូលតារាងភ្លាមៗ</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Batch Merge Multiple Short Videos -->
+    <div class="modal-overlay" id="batchMergeModal">
+        <div class="modal-card"
+            style="max-width: 720px; width: 95%; max-height: 88vh; display: flex; flex-direction: column; padding: 0; overflow: hidden;">
+            <div class="modal-header"
+                style="flex-shrink: 0; padding: 14px 18px; border-bottom: 1px solid #1e293b; background: #0f172a;">
+                <div class="modal-title" style="display: flex; align-items: center; gap: 8px;">
+                    <i data-lucide="layers"></i>
+                    <span>បញ្ចូលវីដេអូខ្លីៗជាច្រើន (Multi-Video Batch Merge)</span>
+                </div>
+                <button class="modal-close" data-close="batchMergeModal"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body"
+                style="flex: 1; overflow-y: auto; padding: 16px 18px; scrollbar-width: thin; scrollbar-color: #334155 #0f172a;">
+                <div
+                    style="font-size: 13px; color: #cbd5e1; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                    <span id="batchCountLabel" style="font-weight: 600; color: #38bdf8;">បានជ្រើសរើស 0 វីដេអូ</span>
+                    <button type="button" id="btnSortBatchNatural" class="btn-mini"
+                        style="background: #1e293b; border: 1px solid #475569; padding: 5px 12px; font-size: 11.5px; border-radius: 6px; cursor: pointer; color: #e2e8f0; display: flex; align-items: center; gap: 6px;">
+                        <i data-lucide="arrow-up-down"></i> <span>តម្រៀបតាមលេខភាគ (1 ➔ 9 / A ➔ Z)</span>
+                    </button>
+                </div>
+                <div
+                    style="font-size: 11.5px; color: #94a3b8; margin-bottom: 12px; background: rgba(30, 41, 59, 0.6); padding: 9px 12px; border-radius: 6px; border-left: 3px solid #6366f1; line-height: 1.5;">
+                    💡 ប្រព័ន្ធបានតម្រៀបវីដេអូខ្លីៗតាមលេខភាគដោយស្វ័យប្រវត្ត។ លោកអ្នកអាចចុចព្រួញ <strong>ឡើងលើ</strong> ឬ
+                    <strong>ចុះក្រោម</strong> ដើម្បីរៀបលំដាប់ឡើងវិញ ឬចុច <strong>លុប</strong>
+                    ដើម្បីលុបវីដេអូដែលមិនចង់បញ្ចូល។
+                </div>
+                <div id="batchFileList"
+                    style="display: flex; flex-direction: column; gap: 6px; max-height: 48vh; overflow-y: auto; padding-right: 4px;">
+                    <!-- Dynamically populated list -->
+                </div>
+            </div>
+            <div class="modal-footer batch-modal-footer">
+                <!-- Top Row: Primary Action Options -->
+                <div class="batch-action-row">
+                    <button type="button" class="batch-action-btn btn-play-sequence" id="btnBatchPlayQueue"
+                        title="ចាក់វីដេអូនីមួយៗបន្តគ្នាស្វ័យប្រវត្តិ ពេលភាគមុខចប់ ចូលភាគបន្ទាប់ភ្លាមៗ">
+                        <i data-lucide="play" style="width: 20px; height: 20px; flex-shrink: 0;"></i>
+                        <div class="btn-text-col">
+                            <span class="btn-main-title">ចាក់បន្តគ្នាស្វ័យប្រវត្ត (Play in Sequence)</span>
+                            <span class="btn-sub-title">ចាក់ភាគនីមួយៗបន្តបន្ទាប់គ្នាជាមួយបញ្ជី Playlist</span>
+                        </div>
+                    </button>
+                    <button type="button" class="batch-action-btn btn-merge-video" id="btnConfirmBatchMerge"
+                        title="បញ្ចូលវីដេអូទាំងអស់ចូលជាវីដេអូតែមួយគត់">
+                        <i data-lucide="combine" style="width: 20px; height: 20px; flex-shrink: 0;"></i>
+                        <div class="btn-text-col">
+                            <span class="btn-main-title">បញ្ចូលគ្នាជាវីដេអូតែមួយ (Merge into 1 Video)</span>
+                            <span class="btn-sub-title">ច្របាច់បញ្ចូលវីដេអូទាំងអស់បង្កើតជាវីដេអូពេញ ១ គត់</span>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Bottom Row: Secondary Utility Actions -->
+                <div class="batch-bottom-row">
+                    <button type="button" class="btn-subtle btn-danger-subtle" id="btnClearBatchList"
+                        title="លុបវីដេអូទាំងអស់ចេញពីបញ្ជី">
+                        <i data-lucide="trash-2"></i> <span>សម្អាតបញ្ជីទាំងអស់</span>
+                    </button>
+                    <button type="button" class="btn-subtle" data-close="batchMergeModal" title="បិទផ្ទាំងនេះ">
+                        <i data-lucide="x"></i> <span>បោះបង់ / បិទ</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Software Update -->
+    <div class="modal-overlay" id="updateModal">
+        <div class="modal-card" style="max-width: 550px;">
+            <div class="modal-header"
+                style="background: linear-gradient(135deg, #1e1b4b, #0f172a); border-bottom: 1px solid rgba(99, 102, 241, 0.3);">
+                <div class="modal-title" style="color: #818cf8; display: flex; align-items: center; gap: 8px;">
+                    <i data-lucide="sparkles" style="color: #f59e0b;"></i>
+                    <span>ពិនិត្យ & អាប់ដេតកម្មវិធី (Software Update)</span>
+                </div>
+                <button class="modal-close" data-close="updateModal"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 16px 20px;">
+                <!-- Status Banner -->
+                <div id="updateStatusBanner"
+                    style="padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: flex-start; gap: 12px; background: rgba(30, 41, 59, 0.7); border: 1px solid #334155;">
+                    <div id="updateBannerIcon" style="font-size: 24px; line-height: 1;">✨</div>
+                    <div style="flex: 1;">
+                        <div id="updateBannerTitle"
+                            style="font-weight: 700; font-size: 14px; color: #f8fafc; margin-bottom: 2px;">
+                            អ្នកកំពុងប្រើប្រាស់កំណែចុងក្រោយបំផុត</div>
+                        <div id="updateBannerDesc" style="font-size: 12px; color: #94a3b8; line-height: 1.4;">
+                            មិនទាន់មានកំណែថ្មីនៅឡើយទេ។ កម្មវិធីដំណើរការបានល្អឥតខ្ចោះ។</div>
+                    </div>
+                </div>
+
+                <!-- Version Info Cards -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;">
+                    <div
+                        style="background: #090d16; border: 1px solid #1e293b; border-radius: 8px; padding: 10px 14px;">
+                        <div
+                            style="font-size: 11px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">
+                            កំណែបច្ចុប្បន្ន (Current)</div>
+                        <div style="font-size: 16px; font-weight: 700; color: #38bdf8;" id="modalCurrentVer">V1.0.0
+                        </div>
+                        <div style="font-size: 10.5px; color: #64748b;" id="modalCurrentBuild">Build 20261108</div>
+                    </div>
+                    <div
+                        style="background: #090d16; border: 1px solid #1e293b; border-radius: 8px; padding: 10px 14px;">
+                        <div
+                            style="font-size: 11px; color: #64748b; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">
+                            កំណែចុងក្រោយ (Latest)</div>
+                        <div style="font-size: 16px; font-weight: 700; color: #10b981;" id="modalLatestVer">V1.0.0</div>
+                        <div style="font-size: 10.5px; color: #64748b;" id="modalUpdateSource">Status: Up to date</div>
+                    </div>
+                </div>
+
+                <!-- Changelog Box -->
+                <div style="margin-bottom: 14px;">
+                    <div
+                        style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                        <i data-lucide="file-text" class="icon-xs"></i> <span>ព័ត៌មានលម្អិតនៃកំណែថ្មី (Release Notes /
+                            Changelog)៖</span>
+                    </div>
+                    <div id="modalChangelog"
+                        style="max-height: 110px; overflow-y: auto; background: #0b101b; border: 1px solid #1e293b; border-radius: 6px; padding: 10px 12px; font-size: 11.5px; color: #cbd5e1; line-height: 1.5; white-space: pre-wrap; font-family: inherit;">
+                        - កំណែ V1.0.0 (Stable Edition)
+                        - គាំទ្រការចាប់សំឡេងចិន Whisper និងសម្រាយខ្មែរតាម AI
+                        - ប្រព័ន្ធ Timeline Multi-Track បែងចែកតួសម្តែងប្រុស/ស្រី
+                    </div>
+                </div>
+
+                <!-- GitHub Repo Source (Optional for user linking) -->
+                <div
+                    style="background: #0d1322; border: 1px solid #1e293b; border-radius: 8px; padding: 10px 12px; margin-bottom: 14px;">
+                    <div
+                        style="font-size: 11.5px; font-weight: 600; color: #94a3b8; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+                        <span style="display: flex; align-items: center; gap: 5px;">
+                            <i data-lucide="git-branch" class="icon-xs"></i> <span>ប្រភព GitHub Repository (Update
+                                Source)៖</span>
+                        </span>
+                        <span style="font-size: 10px; color: #64748b;">(Optional)</span>
+                    </div>
+                    <div style="display: flex; gap: 6px;">
+                        <input type="text" id="inputUpdateRepo"
+                            placeholder="ឧទាហរណ៍៖ https://github.com/username/vocal-studio"
+                            style="flex: 1; background: #070a12; border: 1px solid #334155; border-radius: 6px; color: #e2e8f0; font-size: 11px; padding: 5px 10px; outline: none;">
+                        <button type="button" class="btn-mini" id="btnSaveUpdateRepo"
+                            style="background: #334155; border: none; padding: 5px 12px; font-size: 11px; border-radius: 6px; cursor: pointer;">
+                            រក្សាទុក
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Footer -->
+            <div
+                style="padding: 12px 18px; border-top: 1px solid #1e293b; background: #090e1a; display: flex; justify-content: space-between; align-items: center;">
+                <button type="button" class="btn-mini" id="btnTestUpdateSignal"
+                    style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); color: #fbbf24; font-size: 11px; padding: 6px 12px; border-radius: 6px; cursor: pointer;"
+                    title="ចុចដើម្បីសាកល្បងមើលសញ្ញា Update ភ្លាមៗ">
+                    <i data-lucide="test-tube"></i> <span>សាកល្បងសញ្ញា Update</span>
+                </button>
+                <div style="display: flex; gap: 8px;">
+                    <button type="button" class="btn-mini" id="btnRefreshCheckUpdate"
+                        style="background: #1e293b; border: 1px solid #334155; color: #cbd5e1; padding: 7px 14px; font-size: 12px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                        <i data-lucide="refresh-cw" class="icon-xs"></i> <span>ពិនិត្យម្តងទៀត</span>
+                    </button>
+                    <button type="button" class="btn-mini" id="btnTriggerPerformUpdate"
+                        style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; font-weight: 700; padding: 7px 18px; font-size: 12px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                        <i data-lucide="download"></i> <span>អាប់ដេតឥឡូវនេះ</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script imports -->
+    <script src="/static/js/lucide.min.js"></script>
+    <script src="/static/js/timeline.js?v=57"></script>
+    <script src="/static/js/app.js?v=128"></script>
+</body>
+
+</html>

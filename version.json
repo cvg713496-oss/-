@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "base_version": "1.0.0",
+  "update_count": 0,
+  "pending_updates": 0,
+  "build": "20261108.01",
+  "channel": "stable",
+  "name": "Vocal Studio",
+  "release_date": "2026-11-08",
+  "github_repo": "",
+  "remote_version_url": "",
+  "changelog": "V1.0.0:\n- កម្មវិធីសម្រាយរឿង និង Dubbing ស្វ័យប្រវត្តិចិនទៅខ្មែរ\n- Whisper AI Speech-to-Text និងបំបែកប្រយោគតាមវគ្គ តាមឃ្លា\n- គាំទ្រ Gemini AI / Google Cloud / DeepL / OpenAI សម្រាប់សម្រាយរឿង\n- Timeline Multi-track (ប្រុស/ស្រី), ភ្លេង BGM, Blur អក្សរចិន, និង Watermark\n- Windows Desktop Tool (VocalStudio.exe)",
+  "baseline_timestamp": 1794379213.2700195
+}
